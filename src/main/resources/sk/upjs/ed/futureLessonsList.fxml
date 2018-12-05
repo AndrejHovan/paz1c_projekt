@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="191.0" layoutY="20.0" text="Plánované doučovania">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="addButton" layoutX="515.0" layoutY="113.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="79.0" text="Pridať">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="editButton" layoutX="515.0" layoutY="160.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="79.0" text="Upraviť">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="deleteButton" layoutX="515.0" layoutY="206.0" mnemonicParsing="false" text="Odstrániť">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TableView fx:id="lessonsTableView" layoutX="21.0" layoutY="60.0" prefHeight="329.0" prefWidth="480.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
