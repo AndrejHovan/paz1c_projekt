@@ -5,30 +5,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="85.0" layoutY="14.0" text="Evidencia doučovaní">
+      <Label layoutX="85.0" layoutY="19.0" text="Evidencia doučovaní">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="historyButton" layoutX="85.0" layoutY="111.0" mnemonicParsing="false" text="História doučovaní">
+      <Button fx:id="historyButton" layoutX="85.0" layoutY="111.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" text="História doučovaní">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="studentsButton" layoutX="85.0" layoutY="160.0" mnemonicParsing="false" text="Študenti">
+      <Button fx:id="studentsButton" layoutX="85.0" layoutY="160.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" text="Študenti">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="teachersButton" layoutX="85.0" layoutY="209.0" mnemonicParsing="false" text="Doučovatelia">
+      <Button fx:id="teachersButton" layoutX="85.0" layoutY="209.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" text="Doučovatelia">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="subjectsButton" layoutX="85.0" layoutY="257.0" mnemonicParsing="false" text="Predmety">
+      <Button fx:id="subjectsButton" layoutX="85.0" layoutY="257.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" text="Predmety">
          <font>
             <Font size="14.0" />
          </font>
