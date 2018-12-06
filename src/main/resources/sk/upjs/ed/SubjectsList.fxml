@@ -15,8 +15,6 @@
       </Label>
       <TableView fx:id="subjectsTableView" layoutX="24.0" layoutY="54.0" prefHeight="325.0" prefWidth="554.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
    </children>

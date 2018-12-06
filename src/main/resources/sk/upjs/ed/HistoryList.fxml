@@ -16,8 +16,6 @@
       </Label>
       <TableView fx:id="historyTableView" layoutX="26.0" layoutY="56.0" prefHeight="321.0" prefWidth="545.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
    </children>
