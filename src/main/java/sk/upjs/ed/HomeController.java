@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -32,12 +33,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 
 public class HomeController {
 
+	//private boolean historySceneOpened = false;
+	
+	
+	
+	
     @FXML
     private Button historyButton;
 
@@ -61,8 +68,12 @@ public class HomeController {
 			//@Override WHAAAT?
     		//na cviceniach je override, tu ked ho dame hadze error
 			public void handle(ActionEvent event) {
-				HistoryListController historyController = new HistoryListController();            
-				showWindow(historyController, "HistoryList.fxml");
+				//if(!historySceneOpened) {
+					HistoryListController historyController = new HistoryListController();            
+					showWindow(historyController, "HistoryList.fxml");
+					//historySceneOpened = true;
+				//}
+
 			}
 			
 		});
@@ -118,8 +129,10 @@ public class HomeController {
 			
 			Stage dialog = new Stage();
 			dialog.setScene(scene);
+			dialog.show();
 			//dialog.initModality(Modality.APPLICATION_MODAL);
-			dialog.showAndWait();
+			//dialog.showAndWait();
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

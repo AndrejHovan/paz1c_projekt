@@ -30,7 +30,7 @@ public class StudentsListController {
 	private StudentDao studentDao = DaoFactory.INSTANCE.getStudentDao();
 	private ObservableList<Student> studentsModel;
 	private Map<String, BooleanProperty> columnsVisibility = new LinkedHashMap<>();
-	private ObjectProperty<Student> selectedParticipant = new SimpleObjectProperty<>();
+	private ObjectProperty<Student> selectedStudent = new SimpleObjectProperty<>();
 	@FXML
 	private TableView<Student> studentsTableView;
 

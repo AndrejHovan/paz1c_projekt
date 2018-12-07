@@ -9,13 +9,19 @@ INSTANCE;
 	
 	private JdbcTemplate jdbcTemplate;
 	private StudentDao studentDao;
-//	private DoucovatelDao doucovatelDao;
+	private DoucovatelDao doucovatelDao;
 	//private DoucovanieDao doucovanieDao;
 	
 	public StudentDao getStudentDao() {
 		if (studentDao == null)
 			studentDao = new MySqlStudentDao(getJdbcTemplate());
 		return studentDao;
+	}
+	
+	public DoucovatelDao getDoucovatelDao() {
+		if (doucovatelDao == null)
+			doucovatelDao = new MySqlDoucovatelDao(getJdbcTemplate());
+		return doucovatelDao;
 	}
 	
 	/*public WorkshopDao getWorkshopDao() {
