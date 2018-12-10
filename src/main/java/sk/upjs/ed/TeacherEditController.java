@@ -2,6 +2,9 @@ package sk.upjs.ed;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -15,7 +18,7 @@ public class TeacherEditController {
 
 	private DoucovatelDao doucovatelDao = DaoFactory.INSTANCE.getDoucovatelDao();
 	private Doucovatel doucovatel;
-	//private DoucovatelFxModel doucovatelModel;
+	private DoucovatelFxModel doucovatelModel;
 	
     @FXML
     private ResourceBundle resources;
@@ -44,9 +47,22 @@ public class TeacherEditController {
     @FXML
     private Button addSubjectButton;
 
-    @FXML
-    void initialize() {
-        
+    public TeacherEditController(Doucovatel doucovatel) {
+    	this.doucovatel = doucovatel;
+    	this.doucovatelModel = new DoucovatelFxModel(doucovatel);
+    }
 
+	@FXML
+    void initialize() {
+    	nameTextField.textProperty().bindBidirectional(doucovatelModel.menoProperty());
+    	lastNameTextField.textProperty().bindBidirectional(doucovatelModel.priezviskoProperty());
+    	isActiveCheckBox.selectedProperty().bindBidirectional(doucovatelModel.aktivnyProperty());
+    	saveButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				doucovatelDao.save(doucovatelModel.getDoucovatel());
+				saveButton.getScene().getWindow().hide();
+			}
+		});
     }
 }

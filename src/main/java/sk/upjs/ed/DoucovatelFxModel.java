@@ -33,6 +33,9 @@ public class DoucovatelFxModel {
 	public Boolean getAktivny() {
 		return jeAktivny.get();
 	}
+	public BooleanProperty aktivnyProperty() {
+		return jeAktivny;
+	}	
 	public String getMeno() {
 		return meno.get();
 	}
