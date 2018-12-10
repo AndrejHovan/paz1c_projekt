@@ -7,8 +7,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<<<<<<< HEAD
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+=======
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+>>>>>>> refs/heads/master
    <children>
+<<<<<<< HEAD
       <TextField fx:id="nameTextField" layoutX="123.0" layoutY="31.0" />
       <TextField fx:id="lastNameTextField" layoutX="123.0" layoutY="72.0" />
       <CheckBox fx:id="isActiveCheckBox" layoutX="104.0" layoutY="114.0" mnemonicParsing="false" text="Aktívny" />
@@ -19,5 +24,14 @@
       <ListView fx:id="subjectsList" layoutX="123.0" layoutY="174.0" prefHeight="99.0" prefWidth="160.0" />
       <Label layoutX="15.0" layoutY="174.0" text="Zoznam predmetov:" />
       <Button fx:id="addSubjectButton" layoutX="123.0" layoutY="140.0" mnemonicParsing="false" text="Pridať predmet" />
+=======
+      <TextField fx:id="nameTextField" layoutX="112.0" layoutY="31.0" />
+      <TextField fx:id="lastNameTextField" layoutX="112.0" layoutY="72.0" />
+      <CheckBox fx:id="isActiveCheckBox" layoutX="112.0" layoutY="198.0" mnemonicParsing="false" text="Aktívny" />
+      <Label layoutX="40.0" layoutY="35.0" text="Meno" />
+      <Label layoutX="40.0" layoutY="76.0" text="Priezvisko" />
+      <Button fx:id="saveAsNewButton" layoutX="67.0" layoutY="243.0" mnemonicParsing="false" text="Uložiť ako nového" />
+      <Button fx:id="saveButton" layoutX="213.0" layoutY="243.0" mnemonicParsing="false" text="Uložiť" />
+>>>>>>> refs/heads/master
    </children>
 </AnchorPane>
