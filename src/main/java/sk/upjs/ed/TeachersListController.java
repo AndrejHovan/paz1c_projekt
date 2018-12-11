@@ -2,6 +2,7 @@ package sk.upjs.ed;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.scene.Parent;
@@ -99,6 +100,15 @@ public class TeachersListController {
 			}
 		});
     	
+    	//vymazat vymaze doucovatela zo zoznamu
+    	deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				doucovatelDao.delete(selectedDoucovatel.get().getId());
+	        	//List<Doucovatel> doucovatelia = doucovatelDao.getAll();
+				doucovateliaModel.setAll(doucovatelDao.getAll());
+			}
+		});
     	
     	teachersTableView.getSelectionModel().
 		selectedItemProperty().addListener(new ChangeListener<Doucovatel>() {

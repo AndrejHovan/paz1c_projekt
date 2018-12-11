@@ -48,7 +48,6 @@ public class MySqlDoucovatelDao implements DoucovatelDao {
 		} else {
 			String sql = "UPDATE doucovatel SET meno = ?, priezvisko = ?, aktivny = ? WHERE id = ?";
 			jdbcTemplate.update(sql, doucovatel.getMeno(), doucovatel.getPriezvisko(), doucovatel.isAktivny(), doucovatel.getId());
-			jdbcTemplate.update("DELETE FROM companion WHERE participant_id = ?", doucovatel.getId());
 		}
 
 	}

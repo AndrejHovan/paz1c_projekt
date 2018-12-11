@@ -36,9 +36,6 @@ public class TeacherEditController {
     private CheckBox isActiveCheckBox;
 
     @FXML
-    private Button saveAsNewButton;
-
-    @FXML
     private Button saveButton;
 
     @FXML

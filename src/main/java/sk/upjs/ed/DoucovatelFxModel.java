@@ -7,6 +7,8 @@ import javafx.beans.property.StringProperty;
 import sk.upjs.ed.entity.Doucovatel;
 
 public class DoucovatelFxModel {
+
+	private Long id;
 	private Doucovatel doucovatel;
 	private StringProperty meno = new SimpleStringProperty();
 	private StringProperty priezvisko = new SimpleStringProperty();
@@ -15,6 +17,7 @@ public class DoucovatelFxModel {
 
 	public DoucovatelFxModel(Doucovatel doucovatel) {
 		this.doucovatel = doucovatel;
+		setId(doucovatel.getId());
 		setMeno(doucovatel.getMeno());
 		setPriezvisko(doucovatel.getPriezvisko());
 		setAktivny(doucovatel.isAktivny());
@@ -24,9 +27,16 @@ public class DoucovatelFxModel {
 		doucovatel.setMeno(getMeno());
 		doucovatel.setPriezvisko(getPriezvisko());
 		doucovatel.setAktivny(getAktivny());
+		doucovatel.getId();
 		return doucovatel;
 	}	
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public void setAktivny(boolean aktivny) {
 		this.jeAktivny.set(aktivny);
 	}
