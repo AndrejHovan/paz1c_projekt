@@ -36,7 +36,7 @@ INSTANCE;
 			MysqlDataSource dataSource = new MysqlDataSource();
 			dataSource.setUser("ed2");
 			dataSource.setPassword("paz1cprojekt");
-//			dataSource.setDatabaseName("registracia_itat");
+			dataSource.setDatabaseName("evidenciadoucovani");
 			dataSource.setUrl("jdbc:mysql://localhost/evidenciadoucovani?serverTimezone=Europe/Bratislava");
 			jdbcTemplate = new JdbcTemplate(dataSource);
 		}
