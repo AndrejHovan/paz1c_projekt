@@ -75,6 +75,7 @@ public class TeachersListController {
     	
     	teachersTableView.setItems(doucovateliaModel);
     	
+    	//upravit doucovatela otvori modalne okno s udajmi doucovatela
     	editButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -85,6 +86,19 @@ public class TeachersListController {
 					doucovateliaModel.setAll(doucovatelDao.getAll());
 			}
 		});
+    	
+    	//pridat otvori to iste modalne okno len prazdne
+    	addButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				TeacherEditController editController = 
+							new TeacherEditController(new Doucovatel());            
+					showModalWindow(editController, "TeacherEdit.fxml");
+					// tento kod sa spusti az po zatvoreni okna
+					doucovateliaModel.setAll(doucovatelDao.getAll());
+			}
+		});
+    	
     	
     	teachersTableView.getSelectionModel().
 		selectedItemProperty().addListener(new ChangeListener<Doucovatel>() {
