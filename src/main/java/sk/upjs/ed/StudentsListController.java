@@ -1,5 +1,6 @@
 package sk.upjs.ed;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -10,15 +11,24 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
+import sk.upjs.ed.entity.Doucovatel;
 import sk.upjs.ed.entity.Student;
 import sk.upjs.ed.entity.StupenStudia;
 import sk.upjs.ed.persistent.DaoFactory;
@@ -34,7 +44,14 @@ public class StudentsListController {
 	@FXML
 	private TableView<Student> studentsTableView;
 
+	@FXML
+    private Button addStudentButton;
+
     @FXML
+    private Button removeStudentButton;
+    
+    @FXML
+    //treba dorobit buttony
     void initialize() {
     	studentsModel = FXCollections.observableArrayList(studentDao.getAll());
 
@@ -95,5 +112,44 @@ public class StudentsListController {
     	
     	studentsTableView.setItems(studentsModel);
     	studentsTableView.setEditable(true);
+    	
+    	//pridat otvori to iste modalne okno len prazdne
+    	addStudentButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				StudentEditController editController = 
+							new StudentEditController(new Student());            
+					showModalWindow(editController, "StudentEdit.fxml");
+					// tento kod sa spusti az po zatvoreni okna
+					studentsModel.setAll(studentDao.getAll());
+			}
+		});
+    	
+    	//vymazat vymaze doucovatela zo zoznamu
+    	removeStudentButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				studentDao.delete(selectedStudent.get().getId());
+	        	//List<Student> students = studentDao.getAll();
+				studentsModel.setAll(studentDao.getAll());
+			}
+		});
     }
+
+	private void showModalWindow(Object controller, String fxml) {
+		try {
+			FXMLLoader fxmlLoader = new	FXMLLoader(getClass().getResource(fxml));
+			fxmlLoader.setController(controller);
+			Parent rootPane	= fxmlLoader.load();
+			Scene scene	= new Scene(rootPane);
+			
+			Stage dialog = new Stage();
+			dialog.setScene(scene);
+			dialog.initModality(Modality.APPLICATION_MODAL);
+			dialog.showAndWait();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -10,7 +10,7 @@ public class Doucovanie {
 	private LocalDateTime zaciatok;
 	private int trvanie; // v minutach
 	private double cena;
-	private String okruh;
+	private DoucovanyPredmet predmet;
 	private Doucovatel doucovatel;
 	private String lokacia;
 	private Student student;
@@ -39,11 +39,11 @@ public class Doucovanie {
 	public void setCena(double cena) {
 		this.cena = cena;
 	}
-	public String getOkruh() {
-		return okruh;
+	public DoucovanyPredmet getPredmet() {
+		return predmet;
 	}
-	public void setOkruh(String okruh) {
-		this.okruh = okruh;
+	public void setPredmet(DoucovanyPredmet predmet) {
+		this.predmet = predmet;
 	}
 	public Doucovatel getDoucovatel() {
 		return doucovatel;

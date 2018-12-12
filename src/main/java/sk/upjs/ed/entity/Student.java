@@ -8,6 +8,7 @@ public class Student {
 	private StupenStudia stupenStudia;
 	private String telefon;
 	private String email;
+	private boolean aktivny;
 	
 	public Long getId() {
 		return id;
@@ -45,10 +46,17 @@ public class Student {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public boolean isAktivny() {
+		return aktivny;
+	}
+	public void setAktivny(boolean aktivny) {
+		this.aktivny = aktivny;
+	}
+	
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", meno=" + meno + ", priezvisko=" + priezvisko + ", stupenStudia=" + stupenStudia
-				+ ", telefon=" + telefon + ", email=" + email + "]";
+				+ ", telefon=" + telefon + ", email=" + email + ", aktivny=" + aktivny + "]";
 	}
 		
 }

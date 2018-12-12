@@ -22,4 +22,16 @@ public class MySqlStudentDao implements StudentDao {
 		return studenti;
 	}
 
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void save(Student student) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

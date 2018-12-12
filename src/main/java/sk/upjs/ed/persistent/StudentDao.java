@@ -9,4 +9,8 @@ public interface StudentDao {
 	
 	List<Student> getAll();
 
+	void delete(Long id);
+
+	void save(Student student);
+
 }

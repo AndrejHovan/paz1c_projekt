@@ -10,7 +10,8 @@ INSTANCE;
 	private JdbcTemplate jdbcTemplate;
 	private StudentDao studentDao;
 	private DoucovatelDao doucovatelDao;
-	//private DoucovanieDao doucovanieDao;
+	private DoucovanieDao doucovanieDao;
+	private DoucovanyPredmetDao predmetDao;
 	
 	public StudentDao getStudentDao() {
 		if (studentDao == null)
@@ -23,7 +24,18 @@ INSTANCE;
 			doucovatelDao = new MySqlDoucovatelDao(getJdbcTemplate());
 		return doucovatelDao;
 	}
+	public DoucovanieDao getDoucovanieDao() {
+		if (doucovanieDao == null)
+			doucovanieDao = new MySqlDoucovanieDao(getJdbcTemplate());
+		return doucovanieDao;
+		
+	}
 	
+	public DoucovanyPredmetDao getPredmetDao() {
+		if (predmetDao == null)
+			predmetDao = new MySqlDoucovanyPredmetDao(getJdbcTemplate());
+		return predmetDao;
+	}
 	/*public WorkshopDao getWorkshopDao() {
 		if (workshopDao == null) {
 			workshopDao = new MysqlWorkshopDao(getJdbcTemplate());

@@ -20,7 +20,7 @@ public class HistoriaDoucovaniFxModel {
 	private Long id;
 	private Doucovanie doucovanie;
 	
-	private ObjectProperty<LocalDate> zaciatok = new SimpleObjectProperty<>();
+	private ObjectProperty<LocalDateTime> zaciatok = new SimpleObjectProperty<>();
 	private IntegerProperty trvanie = new SimpleIntegerProperty(); // v minutach
 	private DoubleProperty cena = new SimpleDoubleProperty();
 	private StringProperty okruh = new SimpleStringProperty();  //neskor nahradi predmet
@@ -62,20 +62,16 @@ public class HistoriaDoucovaniFxModel {
 	}
 		
 	
-	public LocalDate getZaciatok() {
+	public LocalDateTime getZaciatok() {
 		return zaciatok.get();
 	}
 	
-	public void setZaciatok(LocalDate zaciatok) {
+	public void setZaciatok(LocalDateTime zaciatok) {
 		this.zaciatok.set(zaciatok);
 	}
 	
-	public ObjectProperty<LocalDate> zaciatokProperty() {
+	public ObjectProperty<LocalDateTime> zaciatokProperty() {
 		return zaciatok;
-	}
-
-	public void setZaciatok(ObjectProperty<LocalDate> zaciatok) {
-		this.zaciatok = zaciatok;
 	}
 
 	public int getTrvanie() {
@@ -114,30 +110,41 @@ public class HistoriaDoucovaniFxModel {
 		return okruh;
 	}
 	
-	public ObjectProperty<Doucovatel> getDoucovatel() {
-		return doucovatel;
+	public String getLokacia() {
+		return lokacia.get();
 	}
 
-	public void setDoucovatel(ObjectProperty<Doucovatel> doucovatel) {
-		this.doucovatel = doucovatel;
+	public void setLokacia(String lokacia) {
+		this.lokacia.set(lokacia);
 	}
-
-	public StringProperty getLokacia() {
+	
+	public StringProperty lokaciaProperty() {
 		return lokacia;
 	}
-
-	public void setLokacia(StringProperty lokacia) {
-		this.lokacia = lokacia;
+	
+	public Doucovatel getDoucovatel() {
+		return doucovatel.get();
 	}
 
-	public ObjectProperty<Student> getStudent() {
+	public void setDoucovatel(Doucovatel doucovatel) {
+		this.doucovatel.set(doucovatel);
+	}
+
+	public ObjectProperty<Doucovatel> doucovatelProperty() {
+		return doucovatel;
+	}
+	
+	public Student getStudent() {
+		return student.get();
+	}
+
+	public void setStudent(Student student) {
+		this.student.set(student);
+	}
+	
+	public ObjectProperty<Student> studentProperty() {
 		return student;
-	}
-
-	public void setStudent(ObjectProperty<Student> student) {
-		this.student = student;
 	}
 	
 }
-
 

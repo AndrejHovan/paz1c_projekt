@@ -1,12 +1,14 @@
 package sk.upjs.ed.entity;
 
+import java.util.List;
+
 public class DoucovanyPredmet {
 	
 	private Long id;
 	private String nazov;
 	private StupenStudia stupenStudia;
 	private String odvetvie;
-	private Doucovatel doucovatel;
+	private List<Doucovatel> doucovatelia;
 	
 	public Long getId() {
 		return id;
@@ -33,10 +35,18 @@ public class DoucovanyPredmet {
 		this.odvetvie = odvetvie;
 	}
 	
+	public List<Doucovatel> getDoucovatelia() {
+		return doucovatelia;
+	}
+
+	public void setCompanions(List<Doucovatel> doucovatelia) {
+		this.doucovatelia = doucovatelia;
+	}
+	
 	@Override
 	public String toString() {
 		return "DoucovanyPredmet [id=" + id + ", nazov=" + nazov + ", stupenStudia=" + stupenStudia + ", odvetvie="
-				+ odvetvie + "]";
+				+ odvetvie + ", docovatelia= " + doucovatelia + "]";
 	}
 	
 	
