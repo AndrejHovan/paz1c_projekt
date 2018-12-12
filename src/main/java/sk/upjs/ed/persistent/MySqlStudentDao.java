@@ -34,4 +34,10 @@ public class MySqlStudentDao implements StudentDao {
 		
 	}
 
+	@Override
+	public void add(Student student) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

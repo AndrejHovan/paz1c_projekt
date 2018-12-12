@@ -7,6 +7,8 @@ import sk.upjs.ed.entity.Student;
 
 public interface StudentDao {
 	
+	void add(Student student);
+	
 	List<Student> getAll();
 
 	void delete(Long id);

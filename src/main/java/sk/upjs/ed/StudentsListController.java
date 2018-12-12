@@ -51,7 +51,6 @@ public class StudentsListController {
     private Button removeStudentButton;
     
     @FXML
-    //treba dorobit buttony
     void initialize() {
     	studentsModel = FXCollections.observableArrayList(studentDao.getAll());
 
@@ -113,7 +112,7 @@ public class StudentsListController {
     	studentsTableView.setItems(studentsModel);
     	studentsTableView.setEditable(true);
     	
-    	//pridat otvori to iste modalne okno len prazdne
+    	//Pridaval som funkcionalitu na button, snazil som sa presne tak, ako pri doucovatelovi
     	addStudentButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -125,7 +124,7 @@ public class StudentsListController {
 			}
 		});
     	
-    	//vymazat vymaze doucovatela zo zoznamu
+    	//Rovnako s mazanim studentov
     	removeStudentButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
