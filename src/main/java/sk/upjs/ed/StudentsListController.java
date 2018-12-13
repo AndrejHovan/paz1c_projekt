@@ -109,6 +109,13 @@ public class StudentsListController {
     	studentsTableView.getColumns().add(emailCol);
     	columnsVisibility.put("E-mail", emailCol.visibleProperty());
     	
+    	TableColumn<Student, Boolean> aktivnyCol = new TableColumn<>("Aktívny");
+    	aktivnyCol.setCellValueFactory(new PropertyValueFactory<>("aktivny"));
+    	//emailCol.setCellFactory(TextFieldTableCell.forTableColumn());
+    	studentsTableView.getColumns().add(aktivnyCol);
+    	columnsVisibility.put("Aktívny", aktivnyCol.visibleProperty());
+
+    	
     	studentsTableView.setItems(studentsModel);
     	studentsTableView.setEditable(true);
     	
