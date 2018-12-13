@@ -85,7 +85,7 @@ public class StudentFxModel {
 	public StringProperty telefonProperty() {
 		return telefon;
 	}	
-
+	
 	public void setAktivny(boolean aktivny) {
 		this.jeAktivny.set(aktivny);
 	}

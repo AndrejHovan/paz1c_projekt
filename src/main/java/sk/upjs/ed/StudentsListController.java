@@ -105,13 +105,11 @@ public class StudentsListController {
     	//stlpec pre email
     	TableColumn<Student, String> emailCol = new TableColumn<>("E-mail");
     	emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-    	//emailCol.setCellFactory(TextFieldTableCell.forTableColumn());
     	studentsTableView.getColumns().add(emailCol);
     	columnsVisibility.put("E-mail", emailCol.visibleProperty());
     	
     	TableColumn<Student, Boolean> aktivnyCol = new TableColumn<>("Aktívny");
     	aktivnyCol.setCellValueFactory(new PropertyValueFactory<>("aktivny"));
-    	//emailCol.setCellFactory(TextFieldTableCell.forTableColumn());
     	studentsTableView.getColumns().add(aktivnyCol);
     	columnsVisibility.put("Aktívny", aktivnyCol.visibleProperty());
 

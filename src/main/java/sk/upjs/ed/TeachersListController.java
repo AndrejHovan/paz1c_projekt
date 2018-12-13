@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sk.upjs.ed.entity.Doucovatel;
+import sk.upjs.ed.entity.Student;
 import sk.upjs.ed.persistent.DaoFactory;
 import sk.upjs.ed.persistent.DoucovatelDao;
 import javafx.beans.property.BooleanProperty;
@@ -75,6 +76,12 @@ public class TeachersListController {
     	priezviskoStlpec.setCellValueFactory(new PropertyValueFactory<>("priezvisko"));
     	teachersTableView.getColumns().add(priezviskoStlpec);
     	columnsVisibility.put("Priezvisko", priezviskoStlpec.visibleProperty());
+    	
+    	//stlpec pre aktivitu
+    	TableColumn<Doucovatel, Boolean> aktivnyStlpec = new TableColumn<>("Aktívny");
+    	aktivnyStlpec.setCellValueFactory(new PropertyValueFactory<>("aktivny"));
+    	teachersTableView.getColumns().add(aktivnyStlpec);
+    	columnsVisibility.put("Aktívny", aktivnyStlpec.visibleProperty());
     	
     	teachersTableView.setItems(doucovateliaModel);
     	
