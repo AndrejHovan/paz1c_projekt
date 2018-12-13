@@ -24,7 +24,8 @@ public class MySqlStudentDao implements StudentDao {
 		simpleJdbcInsert.withTableName("Student");
 		simpleJdbcInsert.usingGeneratedKeyColumns("id");
 		//simpleJdbcInsert.usingColumns("Meno", "Priezvisko", "Stupeň štúdia", "Tel. kontakt", "Email");
-		simpleJdbcInsert.usingColumns("Meno", "Priezvisko", "Tel. kontakt", "Email", "Aktivny");
+		simpleJdbcInsert.usingColumns("Meno", "Priezvisko", "Telefon", "Email");// "Aktivny"); 
+		//aktivny neexistuje v databaze v nasej scheme taky stlpec nebol.. preto to nejde.. 
 		Map<String,Object> hodnoty = new HashMap<>();
 		hodnoty.put("Meno",student.getMeno());
 		hodnoty.put("Priezvisko",student.getPriezvisko());
