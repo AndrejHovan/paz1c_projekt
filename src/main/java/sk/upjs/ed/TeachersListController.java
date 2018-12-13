@@ -55,6 +55,8 @@ public class TeachersListController {
     void initialize() {
     	
     	doucovateliaModel = FXCollections.observableArrayList(doucovatelDao.getAll());
+    	
+    	editButton.setDisable(true);
 
     	//stlpec pre id
     	TableColumn<Doucovatel, Long> idStlpec = new TableColumn<>("ID");
