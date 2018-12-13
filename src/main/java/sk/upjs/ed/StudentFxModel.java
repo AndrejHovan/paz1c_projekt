@@ -2,6 +2,7 @@ package sk.upjs.ed;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import sk.upjs.ed.entity.Student;
@@ -13,9 +14,9 @@ public class StudentFxModel {
 	private StringProperty meno = new SimpleStringProperty();
 	private StringProperty priezvisko = new SimpleStringProperty();
 	private BooleanProperty jeAktivny = new SimpleBooleanProperty();
-	//private StupenStudia stupenStudia;
-	private StringProperty telefon = new SimpleStringProperty();;
-	private StringProperty email = new SimpleStringProperty();;
+	//private StupenStudia stupenStudia = new SimpleObjectProperty();
+	private StringProperty telefon = new SimpleStringProperty();
+	private StringProperty email = new SimpleStringProperty();
 	//este predmety tu maju byt
 
 	public StudentFxModel(Student student) {

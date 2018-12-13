@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import sk.upjs.ed.entity.Student;
+import sk.upjs.ed.entity.StupenStudia;
 import sk.upjs.ed.persistent.DaoFactory;
 
 import sk.upjs.ed.persistent.StudentDao;
@@ -51,12 +52,13 @@ public class StudentEditController {
 
 	@FXML
     void initialize() {
+		//stupenComboBox.getItems().setAll(StupenStudia.values());
     	nameTextField.textProperty().bindBidirectional(studentModel.menoProperty());
     	lastNameTextField.textProperty().bindBidirectional(studentModel.priezviskoProperty());
     	emailTextField.textProperty().bindBidirectional(studentModel.emailProperty());
     	phoneTextField.textProperty().bindBidirectional(studentModel.telefonProperty());
     	isActiveCheckBox.selectedProperty().bindBidirectional(studentModel.aktivnyProperty());
-    	
+    	//stupenComboBox.getSelectionModel().s
     	//este stupen combo box
     	
     	saveButton.setOnAction(new EventHandler<ActionEvent>() {

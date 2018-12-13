@@ -118,7 +118,7 @@ public class StudentsListController {
 			public void handle(ActionEvent event) {
 				StudentEditController editController = 
 							new StudentEditController(new Student());            
-					showModalWindow(editController, "StudentEdit.fxml");
+					showModalWindow(editController, "StudentsEdit.fxml");
 					// tento kod sa spusti az po zatvoreni okna
 					studentsModel.setAll(studentDao.getAll());
 			}
