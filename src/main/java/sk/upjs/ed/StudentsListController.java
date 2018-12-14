@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -136,6 +138,21 @@ public class StudentsListController {
 				studentDao.delete(selectedStudent.get().getId());
 	        	//List<Student> students = studentDao.getAll();
 				studentsModel.setAll(studentDao.getAll());
+			}
+		});
+    	
+    	studentsTableView.getSelectionModel().
+		selectedItemProperty().addListener(new ChangeListener<Student>() {
+			@Override
+			public void changed(ObservableValue<? extends Student> observable, 
+					Student oldValue,
+					Student newValue) {
+				/*if (newValue == null) {
+					editButton.setDisable(true);
+				} else {
+					editButton.setDisable(false);
+				}*/
+				selectedStudent.set(newValue);
 			}
 		});
     }

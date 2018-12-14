@@ -32,9 +32,9 @@ public class MySqlStudentDao implements StudentDao {
 		hodnoty.put("Meno",student.getMeno());
 		hodnoty.put("Priezvisko",student.getPriezvisko());
 		//hodnoty.put("Stupeň Štúdia",student.getStupenStudia());
-		hodnoty.put("Tel. kontakt",student.getTelefon());
+		hodnoty.put("Telefon",student.getTelefon());
 		hodnoty.put("Email",student.getEmail());
-		hodnoty.put("Aktívny",student.isAktivny());
+		hodnoty.put("Aktivny",student.isAktivny());
 		Long id = simpleJdbcInsert.executeAndReturnKey(hodnoty).longValue();
 		student.setId(id);
 		
@@ -67,11 +67,11 @@ public class MySqlStudentDao implements StudentDao {
 	}
 	
 	@Override
-	public void delete(Long id) {
+	public void delete(long id) {
 		int deleted = jdbcTemplate.update("DELETE FROM student WHERE id = ?", id);
 		if (deleted == 0) {
 			//urobit jednu exception triedu pre vsetky entity
-			throw new DoucovateltNotFoundException(id);
+			//throw new DoucovateltNotFoundException(id);
 		}
 		
 	}
