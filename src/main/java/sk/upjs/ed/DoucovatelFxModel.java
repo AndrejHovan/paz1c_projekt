@@ -1,9 +1,14 @@
 package sk.upjs.ed;
 
+import java.util.List;
+
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import sk.upjs.ed.entity.DoucovanyPredmet;
 import sk.upjs.ed.entity.Doucovatel;
 
 public class DoucovatelFxModel {
@@ -13,7 +18,7 @@ public class DoucovatelFxModel {
 	private StringProperty meno = new SimpleStringProperty();
 	private StringProperty priezvisko = new SimpleStringProperty();
 	private BooleanProperty jeAktivny = new SimpleBooleanProperty();
-	//este predmety tu maju byt
+	private ListProperty<DoucovanyPredmet> predmety = new SimpleListProperty<DoucovanyPredmet>();
 
 	public DoucovatelFxModel(Doucovatel doucovatel) {
 		this.doucovatel = doucovatel;
@@ -21,6 +26,10 @@ public class DoucovatelFxModel {
 		setMeno(doucovatel.getMeno());
 		setPriezvisko(doucovatel.getPriezvisko());
 		setAktivny(doucovatel.isAktivny());
+		/*if(doucovatel.getPredmety() != null) {
+			setPredmety(doucovatel.getPredmety());
+
+		}*/
 	}
 	
 	public Doucovatel getDoucovatel() {
@@ -28,6 +37,7 @@ public class DoucovatelFxModel {
 		doucovatel.setPriezvisko(getPriezvisko());
 		doucovatel.setAktivny(getAktivny());
 		doucovatel.getId();
+		doucovatel.getPredmety();
 		return doucovatel;
 	}	
 	
@@ -63,5 +73,17 @@ public class DoucovatelFxModel {
 	}
 	public StringProperty priezviskoProperty() {
 		return priezvisko;
+	}	
+	public List<DoucovanyPredmet> getPredmety() {
+		return predmety.get();
+	}
+	public void setPredmety(List<DoucovanyPredmet> predmety) {
+		this.predmety.setAll(predmety);
+	}
+	public void addPredmet(DoucovanyPredmet predmet) {
+		this.predmety.add(predmet);
+	}
+	public ListProperty<DoucovanyPredmet> predmetyProperty() {
+		return predmety;
 	}	
 }

@@ -20,8 +20,6 @@
       <Button fx:id="addSubjectButton" layoutX="123.0" layoutY="140.0" mnemonicParsing="false" text="Pridať predmet" />
       <TableView fx:id="teacherEditTableView" layoutX="123.0" layoutY="174.0" prefHeight="106.0" prefWidth="286.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
    </children>
