@@ -26,10 +26,9 @@ public class DoucovatelFxModel {
 		setMeno(doucovatel.getMeno());
 		setPriezvisko(doucovatel.getPriezvisko());
 		setAktivny(doucovatel.isAktivny());
-		/*if(doucovatel.getPredmety() != null) {
-			setPredmety(doucovatel.getPredmety());
-
-		}*/
+		//if(doucovatel.getPredmety() != null) {
+		//setPredmety(doucovatel.getPredmety());
+		//}
 	}
 	
 	public Doucovatel getDoucovatel() {
@@ -79,9 +78,6 @@ public class DoucovatelFxModel {
 	}
 	public void setPredmety(List<DoucovanyPredmet> predmety) {
 		this.predmety.setAll(predmety);
-	}
-	public void addPredmet(DoucovanyPredmet predmet) {
-		this.predmety.add(predmet);
 	}
 	public ListProperty<DoucovanyPredmet> predmetyProperty() {
 		return predmety;

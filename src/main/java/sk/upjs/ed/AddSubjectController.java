@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,7 +24,6 @@ public class AddSubjectController {
 	private DoucovanyPredmetDao predmetDao = DaoFactory.INSTANCE.getPredmetDao();
 	private DoucovanyPredmet predmet;
 	private PredmetFxModel predmetModel;
-	//private Doucovatel doucovatel;
 	private DoucovatelFxModel doucovatelModel;
 	
     @FXML
@@ -35,10 +35,10 @@ public class AddSubjectController {
     @FXML
     private ComboBox<StupenStudia> stupenComboBox;
     
-    public AddSubjectController(DoucovatelFxModel doucovatelModel, DoucovanyPredmet predmet) {
+    public AddSubjectController(DoucovanyPredmet predmet, DoucovatelFxModel doucovatelModel) {
     	this.predmet = predmet;
-    	this.doucovatelModel = doucovatelModel;
     	this.predmetModel = new PredmetFxModel(predmet);
+    	this.doucovatelModel = doucovatelModel;
     }
 
     @FXML
@@ -67,21 +67,10 @@ public class AddSubjectController {
     	    	addButton.setOnAction(new EventHandler<ActionEvent>() {
     				@Override
     				public void handle(ActionEvent event) {
-    					List<DoucovanyPredmet> vsetkyPredmety = predmetDao.getAll();
-    					boolean nasloSa = false;
-    					for (DoucovanyPredmet dp : vsetkyPredmety) {
-							if (dp.getNazov().equals(predmetModel.getPredmet().getNazov()) && 
-									dp.getStupenStudia() == predmetModel.getPredmet().getStupenStudia()) {
-									doucovatelModel.addPredmet(dp);
-									nasloSa = true;
-									break;
-							}
-						}
-    					if(!nasloSa) {
-							predmetDao.add(predmetModel.getPredmet());
-							doucovatelModel.addPredmet(predmetModel.getPredmet());
-    					}
-    					
+       					predmetDao.add(predmetModel.getPredmet());
+       					/*List<DoucovanyPredmet> predmetyDoucovatela = doucovatelModel.getPredmety();
+       					predmetyDoucovatela.add(predmetModel.getPredmet());
+       					doucovatelModel.setPredmety(predmetyDoucovatela);*/
     					addButton.getScene().getWindow().hide();
     				}
     			});

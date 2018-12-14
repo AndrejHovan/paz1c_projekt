@@ -76,7 +76,7 @@ public class StudentsListController {
     	
     	//stlpec pre stupen studia trosku komplikovanejsie lebo Enum
     	TableColumn<Student, StupenStudia> stupenStudiaStlpec = new TableColumn<>("Stupeň Štúdia");
-    	stupenStudiaStlpec.setCellValueFactory(new PropertyValueFactory<>("StupenStudia"));
+    	stupenStudiaStlpec.setCellValueFactory(new PropertyValueFactory<>("Stupen"));
     	studentsTableView.getColumns().add(stupenStudiaStlpec);
     	columnsVisibility.put("Stupeň štúdia", stupenStudiaStlpec.visibleProperty());
     

@@ -26,6 +26,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sk.upjs.ed.entity.DoucovanyPredmet;
 import sk.upjs.ed.entity.Doucovatel;
+import sk.upjs.ed.entity.Student;
+import sk.upjs.ed.entity.StupenStudia;
 import sk.upjs.ed.persistent.DaoFactory;
 import sk.upjs.ed.persistent.DoucovanyPredmetDao;
 import sk.upjs.ed.persistent.DoucovatelDao;
@@ -36,15 +38,9 @@ public class TeacherEditController {
 	private DoucovatelDao doucovatelDao = DaoFactory.INSTANCE.getDoucovatelDao();
 	private Doucovatel doucovatel;
 	private DoucovatelFxModel doucovatelModel;
-	private ObservableList<DoucovanyPredmet> predmetyModel; 
+	private ObservableList<DoucovanyPredmet> predmetyModel;
 	private Map<String, BooleanProperty> columnsVisibility = new LinkedHashMap<>();
 
-	
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private TextField nameTextField;
@@ -67,13 +63,14 @@ public class TeacherEditController {
     public TeacherEditController(Doucovatel doucovatel) {
     	this.doucovatel = doucovatel;
     	this.doucovatelModel = new DoucovatelFxModel(doucovatel);
+    	
     }
 
 	@FXML
     void initialize() {
-		
-		predmetyModel = FXCollections.observableArrayList(predmetDao.getAll());
 
+		predmetyModel = FXCollections.observableArrayList(predmetDao.getAll());
+		
     	//stlpec pre id
     	TableColumn<DoucovanyPredmet, Long> idStlpec = new TableColumn<>("ID");
     	idStlpec.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -87,7 +84,14 @@ public class TeacherEditController {
     	columnsVisibility.put("Názov", menoStlpec.visibleProperty());
     	
     	
-		teacherEditTableView.setItems(predmetyModel);
+    	//stlpec pre stupen studia trosku komplikovanejsie lebo Enum
+    	TableColumn<DoucovanyPredmet, StupenStudia> stupenStudiaStlpec = new TableColumn<>("Stupeň Štúdia");
+    	stupenStudiaStlpec.setCellValueFactory(new PropertyValueFactory<>("StupenStudia"));
+    	teacherEditTableView.getColumns().add(stupenStudiaStlpec);
+    	columnsVisibility.put("Stupeň štúdia", stupenStudiaStlpec.visibleProperty());
+    	
+    	teacherEditTableView.setItems(predmetyModel);
+
 		
     	nameTextField.textProperty().bindBidirectional(doucovatelModel.menoProperty());
     	lastNameTextField.textProperty().bindBidirectional(doucovatelModel.priezviskoProperty());
@@ -98,13 +102,15 @@ public class TeacherEditController {
 			@Override
 			public void handle(ActionEvent event) {
 				AddSubjectController addSubjectController = 
-							new AddSubjectController(doucovatelModel, new DoucovanyPredmet() );            
+							new AddSubjectController(new DoucovanyPredmet(), doucovatelModel);            
 					showModalWindow(addSubjectController, "AddSubject.fxml");
 					// tento kod sa spusti az po zatvoreni okna
+					//predmetyModel.setAll(doucovatelModel.getPredmety());
 					predmetyModel.setAll(predmetDao.getAll());
+			    	//teacherEditTableView.setItems(predmetyModel);
+				
 			}
 		});
-    	
     	
     	saveButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
