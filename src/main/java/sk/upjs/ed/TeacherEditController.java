@@ -108,7 +108,7 @@ public class TeacherEditController {
 					//predmetyModel.setAll(doucovatelModel.getPredmety());
 					predmetyModel.setAll(predmetDao.getAll());
 			    	//teacherEditTableView.setItems(predmetyModel);
-				
+				    //
 			}
 		});
     	
