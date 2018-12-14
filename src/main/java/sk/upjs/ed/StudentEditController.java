@@ -1,8 +1,12 @@
 package sk.upjs.ed;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,7 +31,7 @@ public class StudentEditController {
 	 private CheckBox isActiveCheckBox;
 
 	 @FXML
-	 private ComboBox<?> stupenComboBox;
+	 private ComboBox<StupenStudia> stupenComboBox;
 
 	 @FXML
 	 private TextField nameTextField;
@@ -52,14 +56,30 @@ public class StudentEditController {
 
 	@FXML
     void initialize() {
-		//stupenComboBox.getItems().setAll(StupenStudia.values());
+		//nastavujeme hodnoty pre combobox (mozne vybratelne)
+		stupenComboBox.getItems().setAll(StupenStudia.values());
+		//defaultne nastavime strednu skolu
+		stupenComboBox.getSelectionModel().select(StupenStudia.values()[1]);
+		//aby to aj FXmodel videl tak mu to pripomenieme..
+		studentModel.setStupenStudia(stupenComboBox.getSelectionModel().getSelectedItem());
+		//ak zmenime vyber tak sa zmeni aj v FXmodeli
+		stupenComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<StupenStudia>(){
+
+			@Override
+			public void changed(ObservableValue<? extends StupenStudia> observable, StupenStudia oldValue,
+					StupenStudia newValue) {
+				if(newValue != null) {
+					studentModel.setStupenStudia(newValue);
+				}
+				
+			}
+			
+		});
     	nameTextField.textProperty().bindBidirectional(studentModel.menoProperty());
     	lastNameTextField.textProperty().bindBidirectional(studentModel.priezviskoProperty());
     	emailTextField.textProperty().bindBidirectional(studentModel.emailProperty());
     	phoneTextField.textProperty().bindBidirectional(studentModel.telefonProperty());
     	isActiveCheckBox.selectedProperty().bindBidirectional(studentModel.aktivnyProperty());
-    	//stupenComboBox.getSelectionModel().s
-    	//este stupen combo box
     	
     	saveButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override

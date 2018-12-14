@@ -1,6 +1,7 @@
 package sk.upjs.ed;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +15,7 @@ public class StudentFxModel {
 	private StringProperty meno = new SimpleStringProperty();
 	private StringProperty priezvisko = new SimpleStringProperty();
 	private BooleanProperty jeAktivny = new SimpleBooleanProperty();
-	//private StupenStudia stupenStudia = new SimpleObjectProperty();
+	private ObjectProperty<StupenStudia> stupenStudia = new SimpleObjectProperty<StupenStudia>();
 	private StringProperty telefon = new SimpleStringProperty();
 	private StringProperty email = new SimpleStringProperty();
 	//este predmety tu maju byt
@@ -24,6 +25,7 @@ public class StudentFxModel {
 		setId(student.getId());
 		setMeno(student.getMeno());
 		setPriezvisko(student.getPriezvisko());
+		setStupenStudia(student.getStupenStudia());
 		setEmail(student.getEmail());
 		setTelefon(student.getTelefon());
 		setAktivny(student.isAktivny());
@@ -32,6 +34,7 @@ public class StudentFxModel {
 	public Student getStudent() {
 		student.setMeno(getMeno());
 		student.setPriezvisko(getPriezvisko());
+		student.setStupenStudia(getStupenStudia());
 		student.setEmail(getEmail());
 		student.setTelefon(getTelefon());
 		student.setAktivny(getAktivny());
@@ -95,6 +98,17 @@ public class StudentFxModel {
 	public BooleanProperty aktivnyProperty() {
 		return jeAktivny;
 	}	
+	
+	public void setStupenStudia(StupenStudia ss) {
+		this.stupenStudia.set(ss);
+	}
+	public StupenStudia getStupenStudia() {
+		return stupenStudia.get();
+	}
+	public ObjectProperty<StupenStudia> stupenStudiaProperty() {
+		return stupenStudia;
+	}	
+
 
 	
 

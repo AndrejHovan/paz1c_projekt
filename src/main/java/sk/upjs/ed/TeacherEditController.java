@@ -8,7 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import sk.upjs.ed.entity.Doucovatel;
 import sk.upjs.ed.persistent.DaoFactory;
@@ -39,7 +39,7 @@ public class TeacherEditController {
     private Button saveButton;
 
     @FXML
-    private ListView<?> subjectsList;
+    private TableView<?> teacherEditTableView;
 
     @FXML
     private Button addSubjectButton;

@@ -76,28 +76,10 @@ public class StudentsListController {
     	
     	//stlpec pre stupen studia trosku komplikovanejsie lebo Enum
     	TableColumn<Student, StupenStudia> stupenStudiaStlpec = new TableColumn<>("Stupeň Štúdia");
-    	stupenStudiaStlpec.setCellValueFactory(new PropertyValueFactory<>("stupenStudia"));
-    	stupenStudiaStlpec.setCellFactory(new Callback<TableColumn<Student,StupenStudia>, TableCell<Student,StupenStudia>>() {
-			
-			@Override
-			public TableCell<Student,StupenStudia> call(TableColumn<Student,StupenStudia> param) {
-				return new ComboBoxTableCell<>(new StringConverter<StupenStudia>() {
-
-					@Override
-					public String toString(StupenStudia object) {
-						return object==null ? "" : object.name();
-					}
-
-					@Override
-					public StupenStudia fromString(String string) {
-						return string==null ? null : StupenStudia.valueOf(string);
-					}
-				});
-			}
-		});
+    	stupenStudiaStlpec.setCellValueFactory(new PropertyValueFactory<>("StupenStudia"));
     	studentsTableView.getColumns().add(stupenStudiaStlpec);
     	columnsVisibility.put("Stupeň štúdia", stupenStudiaStlpec.visibleProperty());
-    	
+    
     	//stlpec pre telefonne cislo
     	TableColumn<Student, String> telefonStlpec = new TableColumn<>("Tel. kontakt");
     	telefonStlpec.setCellValueFactory(new PropertyValueFactory<>("telefon"));

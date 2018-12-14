@@ -24,14 +24,14 @@ public class MySqlStudentDao implements StudentDao {
 		simpleJdbcInsert.withTableName("Student");
 		simpleJdbcInsert.usingGeneratedKeyColumns("id");
 		//simpleJdbcInsert.usingColumns("Meno", "Priezvisko", "Stupeň štúdia", "Tel. kontakt", "Email");
-		simpleJdbcInsert.usingColumns("Meno", "Priezvisko", "Telefon", "Email", "Aktivny"); 
+		simpleJdbcInsert.usingColumns("Meno", "Priezvisko", "StupenStudia","Telefon", "Email", "Aktivny"); 
 		//aktivny neexistuje v databaze v nasej scheme taky stlpec nebol.. preto to nejde..  
 		// uz existuje pridal som to tam ale teraz je problem s tym ze som dal ze to
 		//nemoze byt null takze nieco sa tam babre aj ked zaskrtnem ze je aktivny
 		Map<String,Object> hodnoty = new HashMap<>();
 		hodnoty.put("Meno",student.getMeno());
 		hodnoty.put("Priezvisko",student.getPriezvisko());
-		//hodnoty.put("Stupeň Štúdia",student.getStupenStudia());
+		hodnoty.put("StupenStudia", student.getStupenStudia());
 		hodnoty.put("Telefon",student.getTelefon());
 		hodnoty.put("Email",student.getEmail());
 		hodnoty.put("Aktivny",student.isAktivny());
@@ -44,7 +44,7 @@ public class MySqlStudentDao implements StudentDao {
 	public List<Student> getAll() {
 		//String sql = "SELECT id, Meno, Priezvisko, StupenStudia, Tel. kontakt, Email, Aktivny FROM student";
 		//ked pridam aktivny alebo stupen studia tak hazdze invalid syntax vynimku
-		String sql = "SELECT id, Meno, Priezvisko, Telefon, Email, Aktivny FROM student";
+		String sql = "SELECT id, Meno, Priezvisko, StupenStudia, Telefon, Email, Aktivny FROM student";
 		List<Student> studenti = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Student.class));
 		return studenti;
 	}
@@ -58,20 +58,20 @@ public class MySqlStudentDao implements StudentDao {
 		} else {
 			//toto neviem presne ako vyplnit
 			//String sql = "UPDATE student SET meno = ?, priezvisko = ?, stupenStudia = ?, telefon = ?, email = ? WHERE id = ?";
-			String sql = "UPDATE student SET meno = ?, priezvisko = ?, telefon = ?, email = ?, aktivny = ? WHERE id = ?";
+			String sql = "UPDATE student SET meno = ?, priezvisko = ?, stupenStudia = ?, telefon = ?, email = ?, aktivny = ? WHERE id = ?";
 			//jdbcTemplate.update(sql, student.getMeno(), student.getPriezvisko(), student.getStupenStudia(), student.getTelefon(), student.getEmail(), student.getId());
-			jdbcTemplate.update(sql, student.getMeno(), student.getPriezvisko(), student.getTelefon(), student.getEmail(), student.isAktivny(),student.getId());
+			jdbcTemplate.update(sql, student.getMeno(), student.getPriezvisko(), student.getStupenStudia(), student.getTelefon(), student.getEmail(), student.isAktivny(),student.getId());
 		}
 
 		
 	}
 	
 	@Override
-	public void delete(long id) {
+	public void delete(long id) throws EntityNotFoundException {
 		int deleted = jdbcTemplate.update("DELETE FROM student WHERE id = ?", id);
 		if (deleted == 0) {
 			//urobit jednu exception triedu pre vsetky entity
-			//throw new DoucovateltNotFoundException(id);
+			throw new EntityNotFoundException(id);
 		}
 		
 	}

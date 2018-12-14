@@ -53,10 +53,10 @@ public class MySqlDoucovatelDao implements DoucovatelDao {
 	}
 
 	@Override
-	public void delete(long id) throws DoucovateltNotFoundException {
+	public void delete(long id) throws EntityNotFoundException {
 		int deleted = jdbcTemplate.update("DELETE FROM doucovatel WHERE id = ?", id);
 		if (deleted == 0) {
-			throw new DoucovateltNotFoundException(id);
+			throw new EntityNotFoundException(id);
 		}
 	}
 
