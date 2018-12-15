@@ -40,6 +40,14 @@ public class DoucovatelFxModel {
 		return doucovatel;
 	}	
 	
+	public void setDoucovatel(Doucovatel d) {
+		doucovatel.setMeno(d.getMeno());
+		doucovatel.setPriezvisko(d.getPriezvisko());
+		doucovatel.setAktivny(d.isAktivny());
+		doucovatel.setId(d.getId());
+		doucovatel.setPredmety(d.getPredmety());
+	}	
+	
 	public Long getId() {
 		return id;
 	}

@@ -31,6 +31,17 @@ public class StudentFxModel {
 		setAktivny(student.isAktivny());
 	}
 	
+	public void setStudent(Student s) {
+		student.setMeno(s.getMeno());
+		student.setPriezvisko(s.getPriezvisko());
+		student.setStupenStudia(s.getStupenStudia());
+		student.setEmail(s.getEmail());
+		student.setTelefon(s.getTelefon());
+		student.setAktivny(s.isAktivny());
+		student.setId(s.getId());
+		
+	}	
+	
 	public Student getStudent() {
 		student.setMeno(getMeno());
 		student.setPriezvisko(getPriezvisko());
@@ -107,10 +118,7 @@ public class StudentFxModel {
 	}
 	public ObjectProperty<StupenStudia> stupenStudiaProperty() {
 		return stupenStudia;
-	}	
+	}
 
-
-	
-
-	
+		
 }

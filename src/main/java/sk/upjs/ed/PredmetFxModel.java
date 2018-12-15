@@ -29,6 +29,12 @@ public class PredmetFxModel {
 		predmet.getId();
 		return predmet;
 	}
+	
+	public void setPredmet(DoucovanyPredmet dp) {
+		predmet.setNazov(dp.getNazov());
+		predmet.setStupenStudia(dp.getStupenStudia());
+		predmet.setId(dp.getId());	
+	}
 
 	public Long getId() {
 		return id;
