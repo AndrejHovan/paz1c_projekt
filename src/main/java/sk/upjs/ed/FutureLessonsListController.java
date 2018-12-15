@@ -89,6 +89,12 @@ public class FutureLessonsListController {
     	lessonsTableView.getColumns().add(zaciatokStlpec);
     	columnsVisibility.put("Zaciatok", zaciatokStlpec.visibleProperty());
     	
+    	//stlpec pre cas
+    	TableColumn<Doucovanie, String> casStlpec = new TableColumn<>("Cas");
+    	casStlpec.setCellValueFactory(new PropertyValueFactory<>("cas"));
+    	lessonsTableView.getColumns().add(casStlpec);
+    	columnsVisibility.put("Cas", casStlpec.visibleProperty());
+    	
     	//stlpec pre trvanie
     	TableColumn<Doucovanie, Long> trvanieStlpec = new TableColumn<>("Trvanie");
     	trvanieStlpec.setCellValueFactory(new PropertyValueFactory<>("trvanie"));

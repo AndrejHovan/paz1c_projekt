@@ -29,5 +29,6 @@
       <Label layoutX="19.0" layoutY="111.0" text="Cena" />
       <ComboBox fx:id="studentComboBox" layoutX="120.0" layoutY="75.0" prefWidth="150.0" />
       <ComboBox fx:id="subjectComboBox" layoutX="120.0" layoutY="214.0" prefWidth="150.0" />
+      <TextField fx:id="timeTextField" layoutX="307.0" layoutY="144.0" prefHeight="25.0" prefWidth="89.0" />
    </children>
 </AnchorPane>

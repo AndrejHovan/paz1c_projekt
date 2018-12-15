@@ -1,9 +1,11 @@
 package sk.upjs.ed;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -20,11 +22,12 @@ public class DoucovanieFxModel {
 	private Doucovanie doucovanie;
 	
 
-	private ObjectProperty<LocalDateTime> zaciatok = new SimpleObjectProperty<>();
+	private ObjectProperty<LocalDate> zaciatok = new SimpleObjectProperty<>();
 	private IntegerProperty trvanie = new SimpleIntegerProperty(); // v minutach
 	private DoubleProperty cena = new SimpleDoubleProperty();
 	private StringProperty lokacia = new SimpleStringProperty();
 	private StringProperty okruh = new SimpleStringProperty();
+	private StringProperty cas = new SimpleStringProperty();
 	private ObjectProperty<Student> student = new SimpleObjectProperty<>(); //spravne?
 	private ObjectProperty<Doucovatel> doucovatel = new SimpleObjectProperty<>(); //spravne?
 	private ObjectProperty<DoucovanyPredmet> predmet = new SimpleObjectProperty<>(); //spravne?
@@ -36,6 +39,7 @@ public class DoucovanieFxModel {
 		
 		setId(doucovanie.getId());
 		setZaciatok(doucovanie.getZaciatok());
+		setCas(doucovanie.getCas());
 		setTrvanie(doucovanie.getTrvanie());
 		setCena(doucovanie.getCena());
 		setLokacia(doucovanie.getLokacia());
@@ -48,6 +52,7 @@ public class DoucovanieFxModel {
 	
 	public Doucovanie getDoucovanie() {
 		doucovanie.setZaciatok(getZaciatok());
+		doucovanie.setCas(getCas());
 		doucovanie.setTrvanie(getTrvanie());
 		doucovanie.setCena(getCena());
 		doucovanie.setLokacia(getLokacia());
@@ -73,15 +78,15 @@ public class DoucovanieFxModel {
 	}
 		
 	
-	public LocalDateTime getZaciatok() {
+	public LocalDate getZaciatok() {
 		return zaciatok.get();
 	}
 	
-	public void setZaciatok(LocalDateTime zaciatok) {
+	public void setZaciatok(LocalDate zaciatok) {
 		this.zaciatok.set(zaciatok);
 	}
 	
-	public ObjectProperty<LocalDateTime> zaciatokProperty() {
+	public Property<LocalDate> zaciatokProperty() {
 		return zaciatok;
 	}
 
@@ -121,6 +126,17 @@ public class DoucovanieFxModel {
 		return lokacia;
 	}
 	
+	public String getCas() {
+		return cas.get();
+	}
+
+	public void setCas(String cas) {
+		this.cas.set(cas);
+	}
+	
+	public StringProperty casProperty() {
+		return cas;
+	}
 	public String getOkruh() {
 		return okruh.get();
 	}

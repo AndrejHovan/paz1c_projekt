@@ -1,5 +1,6 @@
 package sk.upjs.ed.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.print.attribute.standard.DateTimeAtCompleted;
@@ -7,7 +8,8 @@ import javax.print.attribute.standard.DateTimeAtCompleted;
 public class Doucovanie {
 	
 	private Long id;
-	private LocalDateTime zaciatok;
+	private LocalDate zaciatok;
+	private String cas;
 	private int trvanie; // v minutach
 	private double cena;
 	private String okruh;
@@ -22,10 +24,10 @@ public class Doucovanie {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalDateTime getZaciatok() {
+	public LocalDate getZaciatok() {
 		return zaciatok;
 	}
-	public void setZaciatok(LocalDateTime zaciatok) {
+	public void setZaciatok(LocalDate zaciatok) {
 		this.zaciatok = zaciatok;
 	}
 	public int getTrvanie() {
@@ -69,6 +71,12 @@ public class Doucovanie {
 	}
 	public void setOkruh(String okruh) {
 		this.okruh = okruh;
+	}
+	public String getCas() {
+		return cas;
+	}
+	public void setCas(String cas) {
+		this.cas = cas;
 	}
 	
 	

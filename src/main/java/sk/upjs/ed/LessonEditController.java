@@ -10,11 +10,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.util.converter.NumberStringConverter;
 import sk.upjs.ed.entity.Doucovanie;
 import sk.upjs.ed.entity.DoucovanyPredmet;
 import sk.upjs.ed.entity.Doucovatel;
@@ -50,6 +52,9 @@ public class LessonEditController {
 
 	@FXML
 	private TextField fieldTextField;
+	
+	@FXML
+    private TextField timeTextField;
 
 	@FXML
 	private DatePicker startDatePicker;
@@ -82,25 +87,25 @@ public class LessonEditController {
 	private ComboBox<DoucovanyPredmet> subjectComboBox;
 
 	@FXML
-	void clearButtonClicked(ActionEvent event) {
+    void deleteButtonClicked(ActionEvent event) {
 
-	}
+    }
 
-	@FXML
-	void deleteButtonClicked(ActionEvent event) {
+    @FXML
+    void saveButtonClicked(ActionEvent event) {
 
-	}
+    }
 
-	@FXML
-	void saveButtonClicked(ActionEvent event) {
+    @FXML
+    void saveNewDocuovanieButtonClicked(ActionEvent event) {
 
-	}
+    }
+    
+    @FXML
+    void clearButtonClicked(ActionEvent event) {
 
-	@FXML
-	void saveNewDocuovanieButtonClicked(ActionEvent event) {
-
-	}
-
+    }
+    
 	public LessonEditController(Doucovanie doucovanie) {
 		this.doucovanie = doucovanie;
 		this.doucovanieModel = new DoucovanieFxModel(doucovanie);
@@ -168,15 +173,23 @@ public class LessonEditController {
 			subjectComboBox.getSelectionModel().select(predmety.get(0));
 		}
 	*/
-		// trvanie je int, neviem, ako sa int dava do textfieldu, trvanieProperty vracia
-		// integer property
-		// durationTextField.textProperty().bindBidirectional((Property<String>)
-		// doucovanieModel.trvanieProperty().asString());
+		//toto by malo spravne konvertovat int property na string, podobne neskor s double property
+		durationTextField.textProperty().bindBidirectional(doucovanieModel.trvanieProperty(), new NumberStringConverter());
 		fieldTextField.textProperty().bindBidirectional(doucovanieModel.okruhProperty());
 		locationTextField.textProperty().bindBidirectional(doucovanieModel.lokaciaProperty());
-		// priceTextField.textProperty().bindBidirectional((Property<String>)
-		// doucovanieModel.cenaProperty().asString());
-
+		priceTextField.textProperty().bindBidirectional(doucovanieModel.cenaProperty(), new NumberStringConverter());
+		startDatePicker.valueProperty().bindBidirectional(doucovanieModel.zaciatokProperty());
+		timeTextField.textProperty().bindBidirectional(doucovanieModel.casProperty());
+		
+		saveButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				doucovanieDao.save(doucovanieModel.getDoucovanie());
+				saveButton.getScene().getWindow().hide();
+			}
+		});
+		
+		
 	}
 
 	private void UpdatePredmety() {
