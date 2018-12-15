@@ -36,6 +36,8 @@ INSTANCE;
 			predmetDao = new MySqlDoucovanyPredmetDao(getJdbcTemplate());
 		return predmetDao;
 	}
+	
+	
 	/*public WorkshopDao getWorkshopDao() {
 		if (workshopDao == null) {
 			workshopDao = new MysqlWorkshopDao(getJdbcTemplate());
