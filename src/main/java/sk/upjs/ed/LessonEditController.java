@@ -8,6 +8,7 @@ import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,145 +31,172 @@ public class LessonEditController {
 	private StudentDao studentDao = DaoFactory.INSTANCE.getStudentDao();
 	private Student student;
 	private StudentFxModel studentModel;
-	
+	private ObservableList<Student> studenti;
+
 	private DoucovanyPredmetDao predmetDao = DaoFactory.INSTANCE.getPredmetDao();
 	private PredmetFxModel predmetModel;
 	private DoucovatelDao doucovatelDao = DaoFactory.INSTANCE.getDoucovatelDao();
 	private Doucovatel doucovatel;
 	private DoucovatelFxModel doucovatelModel;
-	
+	private ObservableList<Doucovatel> doucovatelia;
+
 	private DoucovanieDao doucovanieDao = DaoFactory.INSTANCE.getDoucovanieDao();
 	private Doucovanie doucovanie;
 	private DoucovanieFxModel doucovanieModel;
-   
-	 @FXML
-	    private TextField durationTextField;
+	private ObservableList<DoucovanyPredmet> predmety;
 
-	    @FXML
-	    private TextField fieldTextField;
+	@FXML
+	private TextField durationTextField;
 
-	    @FXML
-	    private DatePicker startDatePicker;
+	@FXML
+	private TextField fieldTextField;
 
-	    @FXML
-	    private Button saveButton;
+	@FXML
+	private DatePicker startDatePicker;
 
-	    @FXML
-	    private Button addAsNewButton;
+	@FXML
+	private Button saveButton;
 
-	    @FXML
-	    private Button clearButton;
+	@FXML
+	private Button addAsNewButton;
 
-	    @FXML
-	    private Button deleteButton;
+	@FXML
+	private Button clearButton;
 
-	    @FXML
-	    private ComboBox<Doucovatel> teacherComboBox;
+	@FXML
+	private Button deleteButton;
 
-	    @FXML
-	    private TextField locationTextField;
+	@FXML
+	private ComboBox<Doucovatel> teacherComboBox;
 
-	    @FXML
-	    private TextField priceTextField;
+	@FXML
+	private TextField locationTextField;
 
-	    @FXML
-	    private ComboBox<Student> studentComboBox;
+	@FXML
+	private TextField priceTextField;
 
-	    @FXML
-	    private ComboBox<DoucovanyPredmet> subjectComboBox;
+	@FXML
+	private ComboBox<Student> studentComboBox;
 
-	    @FXML
-	    void clearButtonClicked(ActionEvent event) {
+	@FXML
+	private ComboBox<DoucovanyPredmet> subjectComboBox;
 
-	    }
+	@FXML
+	void clearButtonClicked(ActionEvent event) {
 
-	    @FXML
-	    void deleteButtonClicked(ActionEvent event) {
+	}
 
-	    }
+	@FXML
+	void deleteButtonClicked(ActionEvent event) {
 
-	    @FXML
-	    void saveButtonClicked(ActionEvent event) {
+	}
 
-	    }
+	@FXML
+	void saveButtonClicked(ActionEvent event) {
 
-	    @FXML
-	    void saveNewDocuovanieButtonClicked(ActionEvent event) {
+	}
 
-	    }
-	    
-	    public LessonEditController(Doucovanie doucovanie) {
-	    	this.doucovanie = doucovanie;
-	    	this.doucovanieModel = new DoucovanieFxModel(doucovanie);
-	    	
-	    }
+	@FXML
+	void saveNewDocuovanieButtonClicked(ActionEvent event) {
 
-    @FXML
-    void initialize() {
-    	//comboBox pre vyber studentov
-    	List<Student> studenti = studentDao.getAll();
-    	studentComboBox.setItems(FXCollections.observableList(studenti));
-    	studentComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
+	}
 
-				@Override
-				public void changed(ObservableValue<? extends Student> observable, 
-						Student oldValue, Student newValue) {
-					if (newValue != null) {
-						studentModel.setStudent(newValue);
-					}
+	public LessonEditController(Doucovanie doucovanie) {
+		this.doucovanie = doucovanie;
+		this.doucovanieModel = new DoucovanieFxModel(doucovanie);
+
+	}
+
+	@FXML
+	void initialize() {
+		// comboBox pre vyber studentov
+		studenti = FXCollections.observableArrayList(studentDao.getAll());
+		studentComboBox.setItems(studenti);
+		studentComboBox.getSelectionModel().select(studenti.get(0));
+
+		studentComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
+				if (newValue != null) {
+					studentModel.setStudent(newValue);
 				}
-			});
+			}
+		});
 
-    	if (!studenti.isEmpty()) {
-    		studentComboBox.getSelectionModel().select(studenti.get(0));
-    	}
-    	//comboBox pre vyber doucovatelov
-    	List<Doucovatel> doucovatelia = doucovatelDao.getAll();
-    	teacherComboBox.setItems(FXCollections.observableList(doucovatelia));
-    	teacherComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Doucovatel>() {
+		if (!studenti.isEmpty()) {
+			studentComboBox.getSelectionModel().select(studenti.get(0));
+		}
+		// comboBox pre vyber doucovatelov
+		doucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
+		teacherComboBox.setItems(doucovatelia);
+		teacherComboBox.getSelectionModel().select(doucovatelia.get(0));
 
-				@Override
-				public void changed(ObservableValue<? extends Doucovatel> observable, 
-						Doucovatel oldValue, Doucovatel newValue) {
-					if (newValue != null) {
-						doucovatelModel.setDoucovatel(newValue);
-					}
+		teacherComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Doucovatel>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Doucovatel> observable, Doucovatel oldValue,
+					Doucovatel newValue) {
+				if (newValue != null) {
+					doucovatelModel.setDoucovatel(newValue);
+					UpdatePredmety();
 				}
-			});
+			}
+		});
 
-    	if (!doucovatelia.isEmpty()) {
-    		teacherComboBox.getSelectionModel().select(doucovatelia.get(0));
-    	}
-    	
-    	//comboBox pre vyber predmetov
-    	List<DoucovanyPredmet> predmety = predmetDao.getAll();
-    	subjectComboBox.setItems(FXCollections.observableList(predmety));
-    	subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<DoucovanyPredmet>() {
+		if (!doucovatelia.isEmpty()) {
+			teacherComboBox.getSelectionModel().select(doucovatelia.get(0));
+		}
+		
+		 /*
+		// comboBox pre vyber predmetov
+		predmety = (ObservableList<DoucovanyPredmet>) doucovatelia.get(0).getPredmety();
+		subjectComboBox.setItems(predmety);
+		// subjectComboBox.getSelectionModel().select(predmety.get(0));
+		subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<DoucovanyPredmet>() {
 
-				@Override
-				public void changed(ObservableValue<? extends DoucovanyPredmet> observable, 
-						DoucovanyPredmet oldValue, DoucovanyPredmet newValue) {
-					if (newValue != null) {
-						predmetModel.setPredmet(newValue);
-					}
+			@Override
+			public void changed(ObservableValue<? extends DoucovanyPredmet> observable, DoucovanyPredmet oldValue,
+					DoucovanyPredmet newValue) {
+				if (newValue != null) {
+					predmetModel.setPredmet(newValue);
 				}
-			});
+			}
+		});
 
-    	if (!predmety.isEmpty()) {
-    		subjectComboBox.getSelectionModel().select(predmety.get(0));
-    	}
+		if (!predmety.isEmpty()) {
+			subjectComboBox.getSelectionModel().select(predmety.get(0));
+		}
+	*/
+		// trvanie je int, neviem, ako sa int dava do textfieldu, trvanieProperty vracia
+		// integer property
+		// durationTextField.textProperty().bindBidirectional((Property<String>)
+		// doucovanieModel.trvanieProperty().asString());
+		fieldTextField.textProperty().bindBidirectional(doucovanieModel.okruhProperty());
+		locationTextField.textProperty().bindBidirectional(doucovanieModel.lokaciaProperty());
+		// priceTextField.textProperty().bindBidirectional((Property<String>)
+		// doucovanieModel.cenaProperty().asString());
 
-    	//trvanie je int, neviem, ako sa int dava do textfieldu, trvanieProperty vracia integer property
-    	//durationTextField.textProperty().bindBidirectional((Property<String>) doucovanieModel.trvanieProperty().asString());
-    	fieldTextField.textProperty().bindBidirectional(doucovanieModel.okruhProperty());
-    	locationTextField.textProperty().bindBidirectional(doucovanieModel.lokaciaProperty());
-    	//priceTextField.textProperty().bindBidirectional((Property<String>) doucovanieModel.cenaProperty().asString());
-    	
-    	
-    	
-    	
-    }
-    
-    
+	}
+
+	private void UpdatePredmety() {
+		predmety = (ObservableList<DoucovanyPredmet>) doucovatelModel.getPredmety();
+		subjectComboBox.setItems(predmety);
+		subjectComboBox.getSelectionModel().select(predmety.get(0));
+		subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<DoucovanyPredmet>() {
+
+			@Override
+			public void changed(ObservableValue<? extends DoucovanyPredmet> observable, DoucovanyPredmet oldValue,
+					DoucovanyPredmet newValue) {
+				if (newValue != null) {
+					predmetModel.setPredmet(newValue);
+				}
+			}
+		});
+
+		if (!predmety.isEmpty()) {
+			subjectComboBox.getSelectionModel().select(predmety.get(0));
+		}
+	}
+
 }
-

@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import sk.upjs.ed.entity.DoucovanyPredmet;
 import sk.upjs.ed.entity.Doucovatel;
 
@@ -18,7 +19,7 @@ public class DoucovatelFxModel {
 	private StringProperty meno = new SimpleStringProperty();
 	private StringProperty priezvisko = new SimpleStringProperty();
 	private BooleanProperty jeAktivny = new SimpleBooleanProperty();
-	private ListProperty<DoucovanyPredmet> predmety = new SimpleListProperty<DoucovanyPredmet>();
+	private ListProperty<DoucovanyPredmet> predmety = new SimpleListProperty<DoucovanyPredmet>(FXCollections.observableArrayList());
 
 	public DoucovatelFxModel(Doucovatel doucovatel) {
 		this.doucovatel = doucovatel;
@@ -27,7 +28,7 @@ public class DoucovatelFxModel {
 		setPriezvisko(doucovatel.getPriezvisko());
 		setAktivny(doucovatel.isAktivny());
 		//if(doucovatel.getPredmety() != null) {
-		//setPredmety(doucovatel.getPredmety());
+		setPredmety(doucovatel.getPredmety());
 		//}
 	}
 	
