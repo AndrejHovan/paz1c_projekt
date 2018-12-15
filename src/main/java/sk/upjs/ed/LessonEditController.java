@@ -12,58 +12,61 @@ import javafx.scene.control.TextField;
 public class LessonEditController {
 
    
-    @FXML
-    private ComboBox<?> edLevelComboBox;
+	 @FXML
+	    private TextField durationTextField;
 
-    @FXML
-    private TextField nameTextField;
+	    @FXML
+	    private TextField fieldTextField;
 
-    @FXML
-    private TextField durationTextField;
+	    @FXML
+	    private DatePicker startDatePicker;
 
-    @FXML
-    private TextField subjectTextField;
+	    @FXML
+	    private Button saveButton;
 
-    @FXML
-    private TextField fieldTextField;
+	    @FXML
+	    private Button addAsNewButton;
 
-    @FXML
-    private DatePicker startDatePicker;
+	    @FXML
+	    private Button clearButton;
 
-    @FXML
-    private Button saveButton;
+	    @FXML
+	    private Button deleteButton;
 
-    @FXML
-    private TextField lastNameTextField;
+	    @FXML
+	    private ComboBox<?> teacherComboBox;
 
-    @FXML
-    private ComboBox<?> teacherComboBox;
+	    @FXML
+	    private TextField locationTextField;
 
-    @FXML
-    private TextField locationTextField;
+	    @FXML
+	    private TextField priceTextField;
 
-    @FXML
-    private TextField priceTextField;
+	    @FXML
+	    private ComboBox<?> studentComboBox;
 
-    @FXML
-    void clearButtonClicked(ActionEvent event) {
+	    @FXML
+	    private ComboBox<?> subjectComboBox;
 
-    }
+	    @FXML
+	    void clearButtonClicked(ActionEvent event) {
 
-    @FXML
-    void deleteButtonClicked(ActionEvent event) {
+	    }
 
-    }
+	    @FXML
+	    void deleteButtonClicked(ActionEvent event) {
 
-    @FXML
-    void saveButtonClicked(ActionEvent event) {
+	    }
 
-    }
+	    @FXML
+	    void saveButtonClicked(ActionEvent event) {
 
-    @FXML
-    void saveNewWorkshopButtonClicked(ActionEvent event) {
+	    }
 
-    }
+	    @FXML
+	    void saveNewDocuovanieButtonClicked(ActionEvent event) {
+
+	    }
 
     @FXML
     void initialize() {

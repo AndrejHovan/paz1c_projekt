@@ -9,29 +9,25 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ComboBox fx:id="edLevelComboBox" layoutX="119.0" layoutY="41.0" prefHeight="25.0" prefWidth="56.0" />
-      <Label layoutX="21.0" layoutY="45.0" text="Stupeň štúdia" />
-      <TextField fx:id="nameTextField" layoutX="119.0" layoutY="75.0" prefHeight="25.0" prefWidth="149.0" />
       <TextField fx:id="durationTextField" layoutX="120.0" layoutY="179.0" />
-      <TextField fx:id="subjectTextField" layoutX="119.0" layoutY="214.0" />
       <TextField fx:id="fieldTextField" layoutX="119.0" layoutY="251.0" />
       <DatePicker fx:id="startDatePicker" layoutX="121.0" layoutY="144.0" />
-      <Label layoutX="18.0" layoutY="79.0" text="Meno" />
-      <Label layoutX="20.0" layoutY="113.0" text="Priezvisko" />
+      <Label layoutX="18.0" layoutY="79.0" text="Študent" />
       <Label layoutX="21.0" layoutY="148.0" text="Začiatok" />
       <Label layoutX="21.0" layoutY="183.0" text="Trvanie" />
       <Label layoutX="21.0" layoutY="218.0" text="Predmet" />
       <Label layoutX="24.0" layoutY="255.0" text="Okruh" />
       <Label layoutX="19.0" layoutY="289.0" text="Doučovateľ" />
       <Button fx:id="saveButton" layoutX="310.0" layoutY="338.0" mnemonicParsing="false" onAction="#saveButtonClicked" text="Uložiť" />
-      <Button layoutX="310.0" layoutY="297.0" mnemonicParsing="false" onAction="#saveNewWorkshopButtonClicked" text="Pridať ako nový" />
-      <Button layoutX="308.0" layoutY="263.0" mnemonicParsing="false" onAction="#clearButtonClicked" text="Vyčisti" />
-      <Button layoutX="307.0" layoutY="226.0" mnemonicParsing="false" onAction="#deleteButtonClicked" text="Vymazať" />
-      <TextField fx:id="lastNameTextField" layoutX="120.0" layoutY="109.0" />
+      <Button fx:id="addAsNewButton" layoutX="310.0" layoutY="297.0" mnemonicParsing="false" onAction="#saveNewDocuovanieButtonClicked" text="Pridať ako nový" />
+      <Button fx:id="clearButton" layoutX="308.0" layoutY="263.0" mnemonicParsing="false" onAction="#clearButtonClicked" text="Vyčisti" />
+      <Button fx:id="deleteButton" layoutX="307.0" layoutY="226.0" mnemonicParsing="false" onAction="#deleteButtonClicked" text="Vymazať" />
       <ComboBox fx:id="teacherComboBox" layoutX="119.0" layoutY="285.0" prefWidth="150.0" />
       <Label layoutX="20.0" layoutY="322.0" prefHeight="25.0" prefWidth="56.0" text="Lokalita" />
       <TextField fx:id="locationTextField" layoutX="119.0" layoutY="322.0" />
-      <TextField fx:id="priceTextField" layoutX="120.0" layoutY="361.0" />
-      <Label layoutX="27.0" layoutY="365.0" text="Cena" />
+      <TextField fx:id="priceTextField" layoutX="119.0" layoutY="107.0" />
+      <Label layoutX="19.0" layoutY="111.0" text="Cena" />
+      <ComboBox fx:id="studentComboBox" layoutX="120.0" layoutY="75.0" prefWidth="150.0" />
+      <ComboBox fx:id="subjectComboBox" layoutX="120.0" layoutY="214.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
