@@ -93,6 +93,7 @@ public class MySqlDoucovatelDao implements DoucovatelDao {
 			String sql = "UPDATE doucovatel SET meno = ?, priezvisko = ?, aktivny = ? WHERE id = ?";
 			jdbcTemplate.update(sql, doucovatel.getMeno(), doucovatel.getPriezvisko(), doucovatel.isAktivny(),
 					doucovatel.getId());
+			insertDoucovanyPredmet(doucovatel);
 		}
 
 	}
@@ -104,7 +105,7 @@ public class MySqlDoucovatelDao implements DoucovatelDao {
 			sb.append("INSERT INTO doucovanepredmety_has_doucovatel (DoucovanePredmety_idDoucovanePredmety,Doucovatel_idDoucovatel)");
 			sb.append(" VALUES ");
 			for (int i = 0; i < doucovatel.getPredmety().size(); i++) {
-				sb.append("("+ doucovatel.getId() + "," + doucovatel.getPredmety().get(i).getId()+ "),");
+				sb.append("("+ doucovatel.getPredmety().get(i).getId() + "," + doucovatel.getId()+ "),");
 			}
 			String insertSQL = sb.substring(0,sb.length()-1);
 			jdbcTemplate.update(insertSQL);

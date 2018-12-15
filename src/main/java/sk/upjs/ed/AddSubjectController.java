@@ -18,10 +18,12 @@ import sk.upjs.ed.entity.Doucovatel;
 import sk.upjs.ed.entity.StupenStudia;
 import sk.upjs.ed.persistent.DaoFactory;
 import sk.upjs.ed.persistent.DoucovanyPredmetDao;
+import sk.upjs.ed.persistent.DoucovatelDao;
 
 public class AddSubjectController {
 	
 	private DoucovanyPredmetDao predmetDao = DaoFactory.INSTANCE.getPredmetDao();
+	private DoucovatelDao doucovatelDao = DaoFactory.INSTANCE.getDoucovatelDao();
 	private DoucovanyPredmet predmet;
 	private PredmetFxModel predmetModel;
 	private DoucovatelFxModel doucovatelModel;
@@ -67,7 +69,17 @@ public class AddSubjectController {
     	    	addButton.setOnAction(new EventHandler<ActionEvent>() {
     				@Override
     				public void handle(ActionEvent event) {
+    					List<DoucovanyPredmet> vsetkyPredmety = predmetDao.getAll();
+    					for (DoucovanyPredmet dp : vsetkyPredmety) {
+    						if (predmetModel.getNazov().equals(dp.getNazov()) && predmetModel.getStupenStudia() == dp.getStupenStudia()) {
+    							predmetModel.setId(dp.getId());
+    							break;
+    						}
+
+						}
        					predmetDao.add(predmetModel.getPredmet());
+       					doucovatelModel.getPredmety().add(predmetModel.getPredmet());
+       					//doucovatelDao.save(doucovatelModel.getDoucovatel());
        					/*List<DoucovanyPredmet> predmetyDoucovatela = doucovatelModel.getPredmety();
        					predmetyDoucovatela.add(predmetModel.getPredmet());
        					doucovatelModel.setPredmety(predmetyDoucovatela);*/
@@ -76,4 +88,6 @@ public class AddSubjectController {
     			});
     	    	
     }
+    
+    
 }

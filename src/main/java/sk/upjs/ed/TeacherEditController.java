@@ -69,7 +69,7 @@ public class TeacherEditController {
 	@FXML
     void initialize() {
 
-		predmetyModel = FXCollections.observableArrayList(predmetDao.getAll());
+		predmetyModel =  (ObservableList<DoucovanyPredmet>)doucovatelModel.getPredmety();//
 		
     	//stlpec pre id
     	TableColumn<DoucovanyPredmet, Long> idStlpec = new TableColumn<>("ID");
@@ -106,8 +106,14 @@ public class TeacherEditController {
 					showModalWindow(addSubjectController, "AddSubject.fxml");
 					// tento kod sa spusti az po zatvoreni okna
 					//predmetyModel.setAll(doucovatelModel.getPredmety());
-					predmetyModel.setAll(predmetDao.getAll());
+					//doucovatelDao.save(doucovatelModel.getDoucovatel());
+					predmetyModel.setAll((ObservableList<DoucovanyPredmet>)doucovatelModel.getPredmety());
+			    	teacherEditTableView.setItems(predmetyModel);
+
 			    	//teacherEditTableView.setItems(predmetyModel);
+
+			    	//doucovatelDao.save(doucovatelModel.getDoucovatel());
+					//teacherEditTableView.setItems(predmetyModel);
 				    //
 			}
 		});

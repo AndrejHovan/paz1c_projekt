@@ -36,8 +36,8 @@ public class DoucovatelFxModel {
 		doucovatel.setMeno(getMeno());
 		doucovatel.setPriezvisko(getPriezvisko());
 		doucovatel.setAktivny(getAktivny());
-		doucovatel.getId();
-		doucovatel.getPredmety();
+		doucovatel.setId(getId());
+		doucovatel.setPredmety(getPredmety());
 		return doucovatel;
 	}	
 	
