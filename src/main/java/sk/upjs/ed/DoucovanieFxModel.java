@@ -24,12 +24,12 @@ public class DoucovanieFxModel {
 	private IntegerProperty trvanie = new SimpleIntegerProperty(); // v minutach
 	private DoubleProperty cena = new SimpleDoubleProperty();
 	private StringProperty lokacia = new SimpleStringProperty();
-	
+	private StringProperty okruh = new SimpleStringProperty();
 	private ObjectProperty<Student> student = new SimpleObjectProperty<>(); //spravne?
 	private ObjectProperty<Doucovatel> doucovatel = new SimpleObjectProperty<>(); //spravne?
 	private ObjectProperty<DoucovanyPredmet> predmet = new SimpleObjectProperty<>(); //spravne?
 	
-	//este by mal byt predmet
+	
 	
 	public DoucovanieFxModel(Doucovanie doucovanie) {
 		this.doucovanie = doucovanie;
@@ -39,10 +39,24 @@ public class DoucovanieFxModel {
 		setTrvanie(doucovanie.getTrvanie());
 		setCena(doucovanie.getCena());
 		setLokacia(doucovanie.getLokacia());
+		setOkruh(doucovanie.getOkruh());
 		setPredmet(doucovanie.getPredmet());  
 		setStudent(doucovanie.getStudent());
 		setDoucovatel(doucovanie.getDoucovatel());
 		
+	}
+	
+	public Doucovanie getDoucovanie() {
+		doucovanie.setZaciatok(getZaciatok());
+		doucovanie.setTrvanie(getTrvanie());
+		doucovanie.setCena(getCena());
+		doucovanie.setLokacia(getLokacia());
+		doucovanie.setOkruh(getOkruh());
+		doucovanie.setPredmet(getPredmet());
+		doucovanie.setStudent(getStudent());
+		doucovanie.setDoucovatel(getDoucovatel());		
+		doucovanie.getId();
+		return doucovanie;
 	}
 
 	public Long getId() {
@@ -53,10 +67,7 @@ public class DoucovanieFxModel {
 		this.id = id;
 	}
 
-	public Doucovanie getDoucovanie() {
-		return doucovanie;
-	}
-
+	
 	public void setDoucovanie(Doucovanie doucovanie) {
 		this.doucovanie = doucovanie;
 	}
@@ -108,6 +119,18 @@ public class DoucovanieFxModel {
 	
 	public StringProperty lokaciaProperty() {
 		return lokacia;
+	}
+	
+	public String getOkruh() {
+		return okruh.get();
+	}
+
+	public void setOkruh(String okruh) {
+		this.okruh.set(okruh);
+	}
+	
+	public StringProperty okruhProperty() {
+		return okruh;
 	}
 	
 	public Doucovatel getDoucovatel() {

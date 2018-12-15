@@ -38,4 +38,16 @@ public class MySqlDoucovanieDao implements DoucovanieDao{
 		
 	}
 
+	@Override
+	public List<Doucovanie> getMinule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Doucovanie> getBuduce() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

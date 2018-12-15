@@ -66,7 +66,7 @@ public class FutureLessonsListController {
 	*/
     @FXML
     void initialize() {
-    	studentsModel = FXCollections.observableArrayList(studentDao.getAll());
+    	//studentsModel = FXCollections.observableArrayList(studentDao.getAll());
     	
     	editButton.setDisable(true);
     	//stlpec pre id
@@ -93,6 +93,20 @@ public class FutureLessonsListController {
     	lessonsTableView.getColumns().add(cenaStlpec);
     	columnsVisibility.put("Cena", cenaStlpec.visibleProperty());
     	
+    	//stlpec pre okruh
+    	TableColumn<Doucovanie, String> okruhStlpec = new TableColumn<>("Okruh");
+    	okruhStlpec.setCellValueFactory(new PropertyValueFactory<>("okruh"));
+    	lessonsTableView.getColumns().add(okruhStlpec);
+    	columnsVisibility.put("Okruh", okruhStlpec.visibleProperty());
+    	
+    	//stlpec pre lokalitu
+    	TableColumn<Doucovanie, String> lokaciaStlpec = new TableColumn<>("Lokacia");
+    	lokaciaStlpec.setCellValueFactory(new PropertyValueFactory<>("lokacia"));
+    	lessonsTableView.getColumns().add(lokaciaStlpec);
+    	columnsVisibility.put("Lokacia", lokaciaStlpec.visibleProperty());
+    	
+    	
+    	/*
     	//stlpec pre studenta
     	TableColumn<Doucovanie, Student> studentStlpec = new TableColumn<>("Student");
     	studentStlpec.setCellValueFactory(new PropertyValueFactory<>("student"));
