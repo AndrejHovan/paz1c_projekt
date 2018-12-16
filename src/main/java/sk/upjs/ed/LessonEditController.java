@@ -121,7 +121,8 @@ public class LessonEditController {
 			@Override
 			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
 				if (newValue != null) {
-					studentModel.setStudent(newValue);
+					StudentFxModel studentSkuska = new StudentFxModel(newValue);
+					studentModel = studentSkuska; // teraz je ok nechapem...
 				}
 			}
 		});
@@ -152,11 +153,13 @@ public class LessonEditController {
 			public void changed(ObservableValue<? extends DoucovanyPredmet> observable, DoucovanyPredmet oldValue,
 					DoucovanyPredmet newValue) {
 				if (newValue != null) {
-					predmetModel.setId(newValue.getId());
+					PredmetFxModel predmetModelTemp = new PredmetFxModel(newValue);
+					predmetModel = predmetModelTemp;
+					/*predmetModel.setId(newValue.getId());
 					predmetModel.setNazov(newValue.getNazov());
 					predmetModel.setStupenStudia(newValue.getStupenStudia());
 					System.out.println(newValue.toString());
-					System.out.println(predmetModel.getPredmet().toString());
+					System.out.println(predmetModel.getPredmet().toString());*/
 					UpdateDoucovatelov();
 					boloUpdatenute = true;
 				}
@@ -194,7 +197,8 @@ public class LessonEditController {
 			public void changed(ObservableValue<? extends Doucovatel> observable, Doucovatel oldValue,
 					Doucovatel newValue) {
 				if (newValue != null) {
-					doucovatelModel.setDoucovatel(newValue);
+					DoucovatelFxModel doucovatelModelTemp = new DoucovatelFxModel(newValue);
+					doucovatelModel = doucovatelModelTemp;
 				}
 			}
 		});
@@ -275,18 +279,21 @@ public class LessonEditController {
 			}
 		}
 		teacherComboBox.setItems(doucovatelia);
-		teacherComboBox.getSelectionModel().select(doucovatelia.get(0));
+		if(doucovatelia.size() > 0) {
+			teacherComboBox.getSelectionModel().select(doucovatelia.get(0));
+			teacherComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Doucovatel>() {
 
-		teacherComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Doucovatel>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Doucovatel> observable, Doucovatel oldValue,
-					Doucovatel newValue) {
-				if (newValue != null) {
-					doucovatelModel.setDoucovatel(newValue);
+				@Override
+				public void changed(ObservableValue<? extends Doucovatel> observable, Doucovatel oldValue,
+						Doucovatel newValue) {
+					if (newValue != null) {
+						doucovatelModel.setDoucovatel(newValue);
+					}
 				}
-			}
-		});
+			});
+		}
+
+		
 
 	}
 

@@ -24,7 +24,7 @@ public class MySqlDoucovanieDao implements DoucovanieDao{
 		SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
 		simpleJdbcInsert.withTableName("Doucovanie");
 		simpleJdbcInsert.usingGeneratedKeyColumns("id");
-		simpleJdbcInsert.usingColumns("Zaciatok", "Trvanie", "Cena", "Okruh", "Lokacia", "Cas");
+		simpleJdbcInsert.usingColumns("Zaciatok", "Trvanie", "Cena", "Okruh", "Lokacia", "Cas", "Student_idStudent", "doucovatel_id", "DoucovanePredmety_idDoucovanePredmety");
 		Map<String, Object> hodnoty = new HashMap<>();
 		hodnoty.put("Zaciatok", doucovanie.getZaciatok());
 		hodnoty.put("Trvanie", doucovanie.getTrvanie());
@@ -32,8 +32,8 @@ public class MySqlDoucovanieDao implements DoucovanieDao{
 		hodnoty.put("Okruh", doucovanie.getOkruh());
 		hodnoty.put("Lokacia", doucovanie.getLokacia());
 		hodnoty.put("Cas", doucovanie.getCas());
-		//hodnoty.put("Student_idStudent", doucovanie.getStudent().getId());
-		//hodnoty.put("doucovatel_id", doucovanie.getDoucovatel().getId());
+		hodnoty.put("Student_idStudent", doucovanie.getStudent().getId());
+		hodnoty.put("doucovatel_id", doucovanie.getDoucovatel().getId());
 		hodnoty.put("DoucovanePredmety_idDoucovanePredmety", doucovanie.getPredmet().getId());
 		
 		
