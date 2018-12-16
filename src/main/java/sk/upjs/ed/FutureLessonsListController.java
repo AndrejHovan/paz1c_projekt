@@ -2,6 +2,7 @@ package sk.upjs.ed;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -60,8 +61,13 @@ public class FutureLessonsListController {
    
     @FXML
     void initialize() {
-    	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getAll());
-  
+    	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getBuduce());
+    	
+    	//for (Doucovanie d : doucovanieModel) 
+			//if(d.getZaciatok().isBefore(LocalDate.now()))
+				//doucovanieModel.remove(d);
+		
+    	
     	editButton.setDisable(true);
     	//stlpec pre id
     	TableColumn<Doucovanie, Long> idStlpec = new TableColumn<>("ID");
@@ -143,7 +149,7 @@ public class FutureLessonsListController {
 							new LessonEditController(new Doucovanie());            
 					showModalWindow(editController, "LessonEdit.fxml");
 					// tento kod sa spusti az po zatvoreni okna
-					doucovanieModel.setAll(doucovanieDao.getAll());
+					doucovanieModel.setAll(doucovanieDao.getBuduce());
 			}
 		});
     	
@@ -155,7 +161,7 @@ public class FutureLessonsListController {
 							new LessonEditController(selectedDoucovanie.get());            
 					showModalWindow(editController, "LessonEdit.fxml");
 					// tento kod sa spusti az po zatvoreni okna
-					doucovanieModel.setAll(doucovanieDao.getAll());
+					doucovanieModel.setAll(doucovanieDao.getBuduce());
 			}
 		});
     	
@@ -164,7 +170,7 @@ public class FutureLessonsListController {
 			@Override
 			public void handle(ActionEvent event) {
 				doucovanieDao.delete(selectedDoucovanie.get().getId());
-				doucovanieModel.setAll(doucovanieDao.getAll());
+				doucovanieModel.setAll(doucovanieDao.getBuduce());
 			}
 		});
     	

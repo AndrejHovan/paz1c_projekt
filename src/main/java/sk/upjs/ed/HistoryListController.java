@@ -56,7 +56,7 @@ public class HistoryListController {
    
     @FXML
     void initialize() {
-    	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getAll());
+    	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getMinule());
   
     	editButton.setDisable(true);
     	//stlpec pre id
@@ -129,7 +129,7 @@ public class HistoryListController {
 							new LessonEditController(selectedDoucovanie.get());            
 					showModalWindow(editController, "LessonEdit.fxml");
 					// tento kod sa spusti az po zatvoreni okna
-					doucovanieModel.setAll(doucovanieDao.getAll());
+					doucovanieModel.setAll(doucovanieDao.getMinule());
 			}
 		});
     	
@@ -138,7 +138,7 @@ public class HistoryListController {
 			@Override
 			public void handle(ActionEvent event) {
 				doucovanieDao.delete(selectedDoucovanie.get().getId());
-				doucovanieModel.setAll(doucovanieDao.getAll());
+				doucovanieModel.setAll(doucovanieDao.getMinule());
 			}
 		});
     	
