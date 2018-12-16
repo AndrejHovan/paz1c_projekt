@@ -1,5 +1,6 @@
 package sk.upjs.ed;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
@@ -19,7 +20,8 @@ public class DoucovatelFxModel {
 	private StringProperty meno = new SimpleStringProperty();
 	private StringProperty priezvisko = new SimpleStringProperty();
 	private BooleanProperty jeAktivny = new SimpleBooleanProperty();
-	private ListProperty<DoucovanyPredmet> predmety = new SimpleListProperty<DoucovanyPredmet>(FXCollections.observableArrayList());
+	private ListProperty<DoucovanyPredmet> predmety = new SimpleListProperty<DoucovanyPredmet>(
+			FXCollections.observableArrayList());
 
 	public DoucovatelFxModel(Doucovatel doucovatel) {
 		this.doucovatel = doucovatel;
@@ -27,11 +29,15 @@ public class DoucovatelFxModel {
 		setMeno(doucovatel.getMeno());
 		setPriezvisko(doucovatel.getPriezvisko());
 		setAktivny(doucovatel.isAktivny());
-		//if(doucovatel.getPredmety() != null) {
-		setPredmety(doucovatel.getPredmety());
-		//}
+		//inak null List a to je nedobre.. 
+		if (doucovatel.getPredmety() != null) {
+			setPredmety(doucovatel.getPredmety());
+		}else {
+			List<DoucovanyPredmet> prazdneDoucovanePredmety = new ArrayList<DoucovanyPredmet>();
+			setPredmety(prazdneDoucovanePredmety);
+		}
 	}
-	
+
 	public Doucovatel getDoucovatel() {
 		doucovatel.setMeno(getMeno());
 		doucovatel.setPriezvisko(getPriezvisko());
@@ -39,56 +45,69 @@ public class DoucovatelFxModel {
 		doucovatel.setId(getId());
 		doucovatel.setPredmety(getPredmety());
 		return doucovatel;
-	}	
-	
+	}
+
 	public void setDoucovatel(Doucovatel d) {
 		doucovatel.setMeno(d.getMeno());
 		doucovatel.setPriezvisko(d.getPriezvisko());
 		doucovatel.setAktivny(d.isAktivny());
 		doucovatel.setId(d.getId());
 		doucovatel.setPredmety(d.getPredmety());
-	}	
-	
+	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public void setAktivny(boolean aktivny) {
 		this.jeAktivny.set(aktivny);
 	}
+
 	public Boolean getAktivny() {
 		return jeAktivny.get();
 	}
+
 	public BooleanProperty aktivnyProperty() {
 		return jeAktivny;
-	}	
+	}
+
 	public String getMeno() {
 		return meno.get();
 	}
+
 	public void setMeno(String meno) {
 		this.meno.set(meno);
 	}
+
 	public StringProperty menoProperty() {
 		return meno;
 	}
+
 	public String getPriezvisko() {
 		return priezvisko.get();
 	}
+
 	public void setPriezvisko(String priezvisko) {
 		this.priezvisko.set(priezvisko);
 	}
+
 	public StringProperty priezviskoProperty() {
 		return priezvisko;
-	}	
+	}
+
 	public List<DoucovanyPredmet> getPredmety() {
 		return predmety.get();
 	}
+
 	public void setPredmety(List<DoucovanyPredmet> predmety) {
 		this.predmety.setAll(predmety);
 	}
+
 	public ListProperty<DoucovanyPredmet> predmetyProperty() {
 		return predmety;
-	}	
+	}
 }

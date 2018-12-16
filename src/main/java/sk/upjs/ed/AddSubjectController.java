@@ -70,15 +70,22 @@ public class AddSubjectController {
     				@Override
     				public void handle(ActionEvent event) {
     					List<DoucovanyPredmet> vsetkyPredmety = predmetDao.getAll();
+    					boolean priradilId = false;
     					for (DoucovanyPredmet dp : vsetkyPredmety) {
     						if (predmetModel.getNazov().equals(dp.getNazov()) && predmetModel.getStupenStudia() == dp.getStupenStudia()) {
     							predmetModel.setId(dp.getId());
+    							priradilId = true;
+    							//System.out.println(predmetModel.getPredmet().toString());
     							break;
     						}
 
 						}
+    					if (!priradilId) {
+    						predmetModel.setId(vsetkyPredmety.get(vsetkyPredmety.size()-1).getId()+1);
+    					}
        					predmetDao.add(predmetModel.getPredmet());
        					doucovatelModel.getPredmety().add(predmetModel.getPredmet());
+       					//System.out.println(doucovatelModel.getPredmety().get(doucovatelModel.getPredmety().size()-1).toString());
        					//doucovatelDao.save(doucovatelModel.getDoucovatel());
        					/*List<DoucovanyPredmet> predmetyDoucovatela = doucovatelModel.getPredmety();
        					predmetyDoucovatela.add(predmetModel.getPredmet());

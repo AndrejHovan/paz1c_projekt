@@ -107,8 +107,8 @@ public class TeacherEditController {
 					// tento kod sa spusti az po zatvoreni okna
 					//predmetyModel.setAll(doucovatelModel.getPredmety());
 					//doucovatelDao.save(doucovatelModel.getDoucovatel());
-					predmetyModel.setAll((ObservableList<DoucovanyPredmet>)doucovatelModel.getPredmety());
-			    	teacherEditTableView.setItems(predmetyModel);
+					//predmetyModel.setAll((ObservableList<DoucovanyPredmet>)doucovatelModel.getPredmety());
+			    	//teacherEditTableView.setItems(predmetyModel);
 
 			    	//teacherEditTableView.setItems(predmetyModel);
 
