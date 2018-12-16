@@ -71,9 +71,7 @@ public class LessonEditController {
 	@FXML
 	private Button clearButton;
 
-	@FXML
-	private Button deleteButton;
-
+	
 	@FXML
 	private ComboBox<Doucovatel> teacherComboBox;
 
@@ -88,11 +86,6 @@ public class LessonEditController {
 
 	@FXML
 	private ComboBox<DoucovanyPredmet> subjectComboBox;
-
-	@FXML
-	void deleteButtonClicked(ActionEvent event) {
-
-	}
 
 	@FXML
 	void saveButtonClicked(ActionEvent event) {
@@ -243,6 +236,26 @@ public class LessonEditController {
 			public void handle(ActionEvent event) {
 				doucovanieDao.save(doucovanieModel.getDoucovanie());
 				saveButton.getScene().getWindow().hide();
+			}
+		});
+		
+		clearButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				durationTextField.clear();
+				fieldTextField.clear();
+				priceTextField.clear();
+				timeTextField.clear();
+				locationTextField.clear();
+				startDatePicker.setValue(null);
+			}
+		});
+		
+		addAsNewButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				doucovanieDao.add(doucovanieModel.getDoucovanie());
+				addAsNewButton.getScene().getWindow().hide();
 			}
 		});
 

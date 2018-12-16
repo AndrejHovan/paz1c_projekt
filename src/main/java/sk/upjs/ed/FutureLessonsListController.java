@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -137,7 +139,7 @@ public class FutureLessonsListController {
     
     	*/
     	
-    	//Pridaval som funkcionalitu na button, snazil som sa presne tak, ako pri doucovatelovi
+    	//Tlacidlo na pridanie doucovania
     	addButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -148,7 +150,42 @@ public class FutureLessonsListController {
 					doucovanieModel.setAll(doucovanieDao.getAll());
 			}
 		});
-
+    	
+    	//Tlacidlo na editaciu existujuceho doucovania
+    	editButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				LessonEditController editController = 
+							new LessonEditController(selectedDoucovanie.get());            
+					showModalWindow(editController, "LessonEdit.fxml");
+					// tento kod sa spusti az po zatvoreni okna
+					doucovanieModel.setAll(doucovanieDao.getAll());
+			}
+		});
+    	
+    	//Vyzmazat doucovanie zo zoznamu
+    	deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				doucovanieDao.delete(selectedDoucovanie.get().getId());
+				doucovanieModel.setAll(doucovanieDao.getAll());
+			}
+		});
+    	
+    	lessonsTableView.getSelectionModel().
+		selectedItemProperty().addListener(new ChangeListener<Doucovanie>() {
+			@Override
+			public void changed(ObservableValue<? extends Doucovanie> observable, 
+					Doucovanie oldValue,
+					Doucovanie newValue) {
+				if (newValue == null) {
+					editButton.setDisable(true);
+				} else {
+					editButton.setDisable(false);
+				}
+				selectedDoucovanie.set(newValue);
+			}
+		});
     }
     
     private void showModalWindow(Object controller, String fxml) {

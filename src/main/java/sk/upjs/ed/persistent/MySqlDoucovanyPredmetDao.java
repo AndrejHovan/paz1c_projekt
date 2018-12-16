@@ -52,7 +52,7 @@ public class MySqlDoucovanyPredmetDao implements DoucovanyPredmetDao {
 
 	@Override
 	public List<DoucovanyPredmet> getAll() {
-		String sql = "SELECT id, Nazov, StupenStudia FROM doucovanepredmety"; // vola sa to tak?v
+		String sql = "SELECT id, Nazov, StupenStudia FROM doucovanepredmety"; 
 		List<DoucovanyPredmet> predmety = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(DoucovanyPredmet.class));
 		return predmety;
 	}
