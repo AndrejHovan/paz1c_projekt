@@ -38,9 +38,9 @@ public class PredmetFxModel {
 	}
 	
 	public void setPredmet(DoucovanyPredmet dp) {
-		predmet.setNazov(dp.getNazov());
-		predmet.setStupenStudia(dp.getStupenStudia());
-		predmet.setId(dp.getId());
+		setNazov(dp.getNazov());
+		setStupenStudia(dp.getStupenStudia());
+		setId(dp.getId());
 	}
 
 	public Long getId() {

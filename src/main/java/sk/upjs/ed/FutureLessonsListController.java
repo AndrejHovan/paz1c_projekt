@@ -76,8 +76,8 @@ public class FutureLessonsListController {
 	*/
     @FXML
     void initialize() {
-    	//studentsModel = FXCollections.observableArrayList(studentDao.getAll());
-    	
+    	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getAll());
+  
     	editButton.setDisable(true);
     	//stlpec pre id
     	TableColumn<Doucovanie, Long> idStlpec = new TableColumn<>("ID");
@@ -87,31 +87,31 @@ public class FutureLessonsListController {
 
     	//stlpec pre zaciatok
     	TableColumn<Doucovanie, LocalDateTime> zaciatokStlpec = new TableColumn<>("Zaciatok");
-    	zaciatokStlpec.setCellValueFactory(new PropertyValueFactory<>("zaciatok"));
+    	zaciatokStlpec.setCellValueFactory(new PropertyValueFactory<>("Zaciatok"));
     	lessonsTableView.getColumns().add(zaciatokStlpec);
     	columnsVisibility.put("Zaciatok", zaciatokStlpec.visibleProperty());
     	
     	//stlpec pre cas
     	TableColumn<Doucovanie, String> casStlpec = new TableColumn<>("Cas");
-    	casStlpec.setCellValueFactory(new PropertyValueFactory<>("cas"));
+    	casStlpec.setCellValueFactory(new PropertyValueFactory<>("Cas"));
     	lessonsTableView.getColumns().add(casStlpec);
     	columnsVisibility.put("Cas", casStlpec.visibleProperty());
     	
     	//stlpec pre trvanie
     	TableColumn<Doucovanie, Long> trvanieStlpec = new TableColumn<>("Trvanie");
-    	trvanieStlpec.setCellValueFactory(new PropertyValueFactory<>("trvanie"));
+    	trvanieStlpec.setCellValueFactory(new PropertyValueFactory<>("Trvanie"));
     	lessonsTableView.getColumns().add(trvanieStlpec);
     	columnsVisibility.put("Trvanie", trvanieStlpec.visibleProperty());
     	
     	//stlpec pre cenu
     	TableColumn<Doucovanie, Double> cenaStlpec = new TableColumn<>("Cena");
-    	cenaStlpec.setCellValueFactory(new PropertyValueFactory<>("cena"));
+    	cenaStlpec.setCellValueFactory(new PropertyValueFactory<>("Cena"));
     	lessonsTableView.getColumns().add(cenaStlpec);
     	columnsVisibility.put("Cena", cenaStlpec.visibleProperty());
     	
     	//stlpec pre okruh
     	TableColumn<Doucovanie, String> okruhStlpec = new TableColumn<>("Okruh");
-    	okruhStlpec.setCellValueFactory(new PropertyValueFactory<>("okruh"));
+    	okruhStlpec.setCellValueFactory(new PropertyValueFactory<>("Okruh"));
     	lessonsTableView.getColumns().add(okruhStlpec);
     	columnsVisibility.put("Okruh", okruhStlpec.visibleProperty());
     	
@@ -121,7 +121,7 @@ public class FutureLessonsListController {
     	lessonsTableView.getColumns().add(lokaciaStlpec);
     	columnsVisibility.put("Lokacia", lokaciaStlpec.visibleProperty());
     	
-    	
+    	lessonsTableView.setItems(doucovanieModel);
     	/*
     	//stlpec pre studenta
     	TableColumn<Doucovanie, Student> studentStlpec = new TableColumn<>("Student");

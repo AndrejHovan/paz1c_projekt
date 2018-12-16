@@ -1,11 +1,15 @@
 package sk.upjs.ed.persistent;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import sk.upjs.ed.entity.Doucovanie;
@@ -48,10 +52,25 @@ public class MySqlDoucovanieDao implements DoucovanieDao{
 		//String sql = "SELECT id, Meno, Priezvisko, Aktivny, doucovanepredmety_has_doucovatel.DoucovanePredmety_idDoucovanePredmety AS predmetid "
 				//+ "FROM Doucovatel LEFT JOIN "
 				//+ "doucovanepredmety_has_doucovatel ON doucovatel.id = doucovanepredmety_has_doucovatel.doucovatel_idDoucovatel";
-		
-		String sql = "SELECT id, Zaciatok, Trvanie, Cena, Okruh, Lokacia, Student_idStudent, DoucovanePredmety_idDoucovanePredmety, doucovatel_id FROM doucovanie"; 					
-		List<Doucovanie> doucovania = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Doucovanie.class));
-		return doucovania;
+		//
+		String sql = "SELECT id, Zaciatok, Trvanie, Cas, Cena, Okruh, Lokacia, Student_idStudent, DoucovanePredmety_idDoucovanePredmety, doucovatel_id  FROM doucovanie"; 					
+		//List<Doucovanie> doucovania = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Doucovanie.class));
+		return jdbcTemplate.query(sql, new RowMapper<Doucovanie>() {
+
+			@Override
+			public Doucovanie mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Doucovanie doucovanie = new Doucovanie();
+				doucovanie.setId(rs.getLong("id"));
+				doucovanie.setZaciatok(LocalDate.parse(rs.getString("zaciatok")));
+				doucovanie.setTrvanie(Integer.parseInt(rs.getString("trvanie")));
+				doucovanie.setCas(rs.getString("cas"));
+				doucovanie.setCena(Double.parseDouble(rs.getString("cena")));
+				doucovanie.setOkruh(rs.getString("okruh"));
+				doucovanie.setLokacia(rs.getString("lokacia"));
+				return doucovanie;
+			}
+		});
+				
 	}
 
 	@Override

@@ -48,11 +48,11 @@ public class DoucovatelFxModel {
 	}
 
 	public void setDoucovatel(Doucovatel d) {
-		doucovatel.setMeno(d.getMeno());
-		doucovatel.setPriezvisko(d.getPriezvisko());
-		doucovatel.setAktivny(d.isAktivny());
-		doucovatel.setId(d.getId());
-		doucovatel.setPredmety(d.getPredmety());
+		setMeno(d.getMeno());
+		setPriezvisko(d.getPriezvisko());
+		setAktivny(d.isAktivny());
+		setId(d.getId());
+		setPredmety(d.getPredmety());
 	}
 
 	public Long getId() {

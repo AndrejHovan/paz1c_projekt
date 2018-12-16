@@ -32,13 +32,13 @@ public class StudentFxModel {
 	}
 	
 	public void setStudent(Student s) {
-		student.setMeno(s.getMeno());
-		student.setPriezvisko(s.getPriezvisko());
-		student.setStupenStudia(s.getStupenStudia());
-		student.setEmail(s.getEmail());
-		student.setTelefon(s.getTelefon());
-		student.setAktivny(s.isAktivny());
-		student.setId(s.getId());
+		setMeno(s.getMeno());
+		setPriezvisko(s.getPriezvisko());
+		setStupenStudia(s.getStupenStudia());
+		setEmail(s.getEmail());
+		setTelefon(s.getTelefon());
+		setAktivny(s.isAktivny());
+		setId(s.getId());
 		
 	}	
 	

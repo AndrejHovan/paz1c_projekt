@@ -115,14 +115,20 @@ public class LessonEditController {
 		studentComboBox.setItems(studenti);
 
 		studentComboBox.getSelectionModel().select(studenti.get(0));
+		if(studentModel == null) {
+			studentModel = new StudentFxModel(studenti.get(0));
+
+		}
+		doucovanieModel.setStudent(studentModel.getStudent());
 
 		studentComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
 				if (newValue != null) {
-					StudentFxModel studentModelTemp = new StudentFxModel(newValue);
-					studentModel = studentModelTemp; // teraz je ok nechapem...
+					//StudentFxModel studentModelTemp = new StudentFxModel(newValue);
+					studentModel.setStudent(newValue); 
+					doucovanieModel.setStudent(studentModel.getStudent());
 				}
 			}
 		});
@@ -143,6 +149,7 @@ public class LessonEditController {
 		if (predmetModel == null) {
 			predmetModel = new PredmetFxModel(predmety.get(0));
 			subjectComboBox.getSelectionModel().select(predmety.get(0));
+			doucovanieModel.setPredmet(predmetModel.getPredmet());
 			//UpdateDoucovatelov();
 			System.out.println("Som null");
 		}
@@ -153,27 +160,17 @@ public class LessonEditController {
 			public void changed(ObservableValue<? extends DoucovanyPredmet> observable, DoucovanyPredmet oldValue,
 					DoucovanyPredmet newValue) {
 				if (newValue != null) {
-					PredmetFxModel predmetModelTemp = new PredmetFxModel(newValue);
-					predmetModel = predmetModelTemp;
-					/*predmetModel.setId(newValue.getId());
-					predmetModel.setNazov(newValue.getNazov());
-					predmetModel.setStupenStudia(newValue.getStupenStudia());
-					System.out.println(newValue.toString());
-					System.out.println(predmetModel.getPredmet().toString());*/
-					UpdateDoucovatelov();
+					predmetModel.setPredmet(newValue);
+					doucovanieModel.setPredmet(predmetModel.getPredmet());
 					boloUpdatenute = true;
+					UpdateDoucovatelov();
 				}
 			}
 		});
 
-		/*
-		 * if (!predmety.isEmpty()) {
-		 * subjectComboBox.getSelectionModel().select(predmety.get(0)); }
-		 */
-
 		// comboBox pre vyber doucovatelov
-		//List<Doucovatel> prazdnyListDoucovatelov = new ArrayList<>();
-		if(!boloUpdatenute) {
+		
+		if(!boloUpdatenute) { //iba nazaciatku potom sa robi UpdateDoucovatelov().. asi sa to da aj krajsie
 			doucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
 			doucovatelia.clear();
 			List<Doucovatel> vsetciDoucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
@@ -182,13 +179,17 @@ public class LessonEditController {
 					if (predmetModel.getPredmet().getNazov().equals(d.getPredmety().get(i).getNazov())
 							&& predmetModel.getStupenStudia() == d.getPredmety().get(i).getStupenStudia()) {
 						doucovatelia.add(d);
-						System.out.println(predmetModel.getNazov());
 						break;
 					}
 				}
 			}
-			teacherComboBox.setItems(doucovatelia);
-			teacherComboBox.getSelectionModel().select(doucovatelia.get(0));
+			if (!doucovatelia.isEmpty()) {
+				teacherComboBox.setItems(doucovatelia);
+				teacherComboBox.getSelectionModel().select(doucovatelia.get(0));
+				doucovatelModel = new DoucovatelFxModel(doucovatelia.get(0));
+				doucovanieModel.setDoucovatel(doucovatelModel.getDoucovatel());
+			}
+			
 		}
 		
 		teacherComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Doucovatel>() {
@@ -197,34 +198,14 @@ public class LessonEditController {
 			public void changed(ObservableValue<? extends Doucovatel> observable, Doucovatel oldValue,
 					Doucovatel newValue) {
 				if (newValue != null) {
-					DoucovatelFxModel doucovatelModelTemp = new DoucovatelFxModel(newValue);
-					doucovatelModel = doucovatelModelTemp;
+					//DoucovatelFxModel doucovatelModelTemp = new DoucovatelFxModel(newValue);
+					doucovatelModel.setDoucovatel(newValue);
+					//doucovatelModel = doucovatelModelTemp;
+					doucovanieModel.setDoucovatel(doucovatelModel.getDoucovatel());
 				}
 			}
 		});
 		
-
-		/*
-		 * List<Doucovatel> prazdnyListDoucovatelov = new ArrayList<>(); doucovatelia =
-		 * FXCollections.observableArrayList(prazdnyListDoucovatelov); List<Doucovatel>
-		 * vsetciDoucovatelia =
-		 * FXCollections.observableArrayList(doucovatelDao.getAll()); for (Doucovatel d
-		 * : vsetciDoucovatelia) { for (int i = 0; i<d.getPredmety().size(); i++) {
-		 * if(predmetModel.getPredmet().getNazov().equals(d.getPredmety().get(i).
-		 * getNazov()) && predmetModel.getStupenStudia() ==
-		 * d.getPredmety().get(i).getStupenStudia()) { doucovatelia.add(d); break; } } }
-		 * //doucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
-		 * if(!doucovatelia.isEmpty()) { teacherComboBox.setItems(doucovatelia);
-		 * teacherComboBox.getSelectionModel().select(doucovatelia.get(0));
-		 * 
-		 * teacherComboBox.getSelectionModel().selectedItemProperty().addListener(new
-		 * ChangeListener<Doucovatel>() {
-		 * 
-		 * @Override public void changed(ObservableValue<? extends Doucovatel>
-		 * observable, Doucovatel oldValue, Doucovatel newValue) { if (newValue != null)
-		 * { doucovatelModel.setDoucovatel(newValue); } } }); }
-		 */
-
 		// toto by malo spravne konvertovat int property na string, podobne neskor s
 		// double property
 		durationTextField.textProperty().bindBidirectional(doucovanieModel.trvanieProperty(),
@@ -273,8 +254,8 @@ public class LessonEditController {
 				if (predmetModel.getPredmet().getNazov().equals(d.getPredmety().get(i).getNazov())
 						&& predmetModel.getStupenStudia() == d.getPredmety().get(i).getStupenStudia()) {
 					doucovatelia.add(d);
-					System.out.println(predmetModel.getNazov());
 					break;
+					//asi stacilo len podla ID .. 
 				}
 			}
 		}
@@ -288,6 +269,7 @@ public class LessonEditController {
 						Doucovatel newValue) {
 					if (newValue != null) {
 						doucovatelModel.setDoucovatel(newValue);
+						doucovanieModel.setDoucovatel(doucovatelModel.getDoucovatel());
 					}
 				}
 			});
