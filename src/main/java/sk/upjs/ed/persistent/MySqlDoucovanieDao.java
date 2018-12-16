@@ -13,6 +13,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import sk.upjs.ed.entity.Doucovanie;
+import sk.upjs.ed.entity.DoucovanyPredmet;
+import sk.upjs.ed.entity.Doucovatel;
 import sk.upjs.ed.entity.Student;
 
 public class MySqlDoucovanieDao implements DoucovanieDao{
@@ -53,8 +55,12 @@ public class MySqlDoucovanieDao implements DoucovanieDao{
 				//+ "FROM Doucovatel LEFT JOIN "
 				//+ "doucovanepredmety_has_doucovatel ON doucovatel.id = doucovanepredmety_has_doucovatel.doucovatel_idDoucovatel";
 		//
-		String sql = "SELECT id, Zaciatok, Trvanie, Cas, Cena, Okruh, Lokacia, Student_idStudent, DoucovanePredmety_idDoucovanePredmety, doucovatel_id  FROM doucovanie"; 					
-		//List<Doucovanie> doucovania = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Doucovanie.class));
+		String sql = "SELECT doucovanie.id, doucovanie.Zaciatok, doucovanie.Trvanie, doucovanie.Cas, "
+				+ "doucovanie.Cena, doucovanie.Okruh, doucovanie.Lokacia, doucovanie.Student_idStudent "
+				+ ", doucovanie.DoucovanePredmety_idDoucovanePredmety, doucovanie.doucovatel_id  FROM doucovanie "
+				+ "LEFT JOIN doucovatel ON doucovatel_id = doucovatel.id "
+				+ "LEFT JOIN student ON Student_idStudent = student.id "
+				+ "LEFT JOIN doucovanepredmety ON DoucovanePredmety_idDoucovanePredmety = doucovanepredmety.id"; 					
 		return jdbcTemplate.query(sql, new RowMapper<Doucovanie>() {
 
 			@Override
@@ -67,6 +73,34 @@ public class MySqlDoucovanieDao implements DoucovanieDao{
 				doucovanie.setCena(Double.parseDouble(rs.getString("cena")));
 				doucovanie.setOkruh(rs.getString("okruh"));
 				doucovanie.setLokacia(rs.getString("lokacia"));
+				List<Student> vsetciStudenti = DaoFactory.INSTANCE.getStudentDao().getAll();
+				long idStudenta = rs.getLong("Student_idStudent");
+				for (Student student : vsetciStudenti) {
+					if (student.getId() == idStudenta) {
+						doucovanie.setStudent(student);
+						break;
+					}
+				}
+				List<Doucovatel> vsetciDoucovatelia = DaoFactory.INSTANCE.getDoucovatelDao().getAll();
+				long idDoucovatela = rs.getLong("doucovatel_id");
+				for (Doucovatel doucovatel : vsetciDoucovatelia) {
+					if (doucovatel.getId() == idDoucovatela) {
+						doucovanie.setDoucovatel(doucovatel);
+						break;
+					}
+				}
+				List<DoucovanyPredmet> vsetkyPredmety = DaoFactory.INSTANCE.getPredmetDao().getAll();
+				long idPredmetu = rs.getLong("DoucovanePredmety_idDoucovanePredmety");
+				for (DoucovanyPredmet predmet : vsetkyPredmety) {
+					if (predmet.getId() == idPredmetu) {
+						doucovanie.setPredmet(predmet);
+						break;
+					}
+				}/*
+				doucovanie.setStudent(DaoFactory.INSTANCE.getStudentDao().getById(rs.getLong("Student_idStudent")));
+				doucovanie.setPredmet(DaoFactory.INSTANCE.getPredmetDao().getById(rs.getLong("DoucovanePredmety_idDoucovanePredmety")));
+				doucovanie.setDoucovatel(DaoFactory.INSTANCE.getDoucovatelDao().getById(rs.getLong("doucovatel_id")));
+				*/
 				return doucovanie;
 			}
 		});

@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import sk.upjs.ed.entity.DoucovanyPredmet;
 import sk.upjs.ed.entity.Doucovatel;
+import sk.upjs.ed.entity.Student;
 
 public class MySqlDoucovatelDao implements DoucovatelDao {
 
@@ -82,7 +83,14 @@ public class MySqlDoucovatelDao implements DoucovatelDao {
 		});
 		return doucovatelia;
 	}
-
+	/*
+	@Override
+	public Doucovatel getById(long id) {
+		String sql = "SELECT Meno, Priezvisko FROM doucovatel WHERE id = '" + id + "'" ;
+		Doucovatel doucovatel = (Doucovatel) jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Doucovatel.class));
+		return doucovatel;
+	}
+*/
 	@Override
 	public void save(Doucovatel doucovatel) throws NullPointerException {
 		if (doucovatel == null)

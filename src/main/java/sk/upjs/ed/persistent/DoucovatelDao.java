@@ -13,5 +13,7 @@ public interface DoucovatelDao {
 	void save(Doucovatel doucovatel);
 
 	void delete(long id);
+
+	//Doucovatel getById(long id);
 	
 }

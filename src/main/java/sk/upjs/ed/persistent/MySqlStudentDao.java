@@ -48,6 +48,13 @@ public class MySqlStudentDao implements StudentDao {
 		List<Student> studenti = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Student.class));
 		return studenti;
 	}
+	
+	/*@Override
+	public Student getById(long id) {
+		String sql = "SELECT Meno, Priezvisko, StupenStudia, Telefon, Email, Aktivny FROM student WHERE id = '" + id + "'" ;
+		Student student = (Student) jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Student.class));
+		return student;
+	}*/
 
 	@Override
 	public void save(Student student) throws NullPointerException{

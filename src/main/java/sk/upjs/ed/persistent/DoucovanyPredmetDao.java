@@ -13,5 +13,7 @@ public interface DoucovanyPredmetDao {
 	void save(DoucovanyPredmet predmet);
 
 	void delete(long id);
+
+	//DoucovanyPredmet getById(long id);
 	
 }
