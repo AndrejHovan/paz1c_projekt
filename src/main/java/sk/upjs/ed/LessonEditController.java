@@ -121,8 +121,8 @@ public class LessonEditController {
 			@Override
 			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
 				if (newValue != null) {
-					StudentFxModel studentSkuska = new StudentFxModel(newValue);
-					studentModel = studentSkuska; // teraz je ok nechapem...
+					StudentFxModel studentModelTemp = new StudentFxModel(newValue);
+					studentModel = studentModelTemp; // teraz je ok nechapem...
 				}
 			}
 		});
