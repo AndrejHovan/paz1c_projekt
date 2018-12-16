@@ -50,11 +50,6 @@ public class MySqlDoucovanieDao implements DoucovanieDao{
 
 	@Override
 	public List<Doucovanie> getAll() {
-		
-		//String sql = "SELECT id, Meno, Priezvisko, Aktivny, doucovanepredmety_has_doucovatel.DoucovanePredmety_idDoucovanePredmety AS predmetid "
-				//+ "FROM Doucovatel LEFT JOIN "
-				//+ "doucovanepredmety_has_doucovatel ON doucovatel.id = doucovanepredmety_has_doucovatel.doucovatel_idDoucovatel";
-		//
 		String sql = "SELECT doucovanie.id, doucovanie.Zaciatok, doucovanie.Trvanie, doucovanie.Cas, "
 				+ "doucovanie.Cena, doucovanie.Okruh, doucovanie.Lokacia, doucovanie.Student_idStudent "
 				+ ", doucovanie.DoucovanePredmety_idDoucovanePredmety, doucovanie.doucovatel_id  FROM doucovanie "
@@ -109,13 +104,26 @@ public class MySqlDoucovanieDao implements DoucovanieDao{
 
 	@Override
 	public void save(Doucovanie doucovanie) {
-		// TODO Auto-generated method stub
+		if (doucovanie == null)
+			throw new NullPointerException("doučovanie nemôže byť null");
+		if (doucovanie.getId() == null) {
+			add(doucovanie);
+		} else {
+			String sql = "UPDATE doucovanie SET zaciatok = ?, trvanie = ?, cena = ?, okruh = ?, lokacia = ?, cas = ?, Student_idStudent = ?, doucovatel_id = ?, DoucovanePredmety_idDoucovanePredmety = ? WHERE id = ?";
+			jdbcTemplate.update(sql, doucovanie.getZaciatok(), doucovanie.getTrvanie(), doucovanie.getCena(),
+					doucovanie.getOkruh(), doucovanie.getLokacia(), doucovanie.getCas(), doucovanie.getStudent().getId(),
+					doucovanie.getDoucovatel().getId(), doucovanie.getPredmet().getId(), doucovanie.getId());
+			
+		}
 		
 	}
 
 	@Override
-	public void delete(long id) {
-		// TODO Auto-generated method stub
+	public void delete(long id) throws EntityNotFoundException{
+		int deleted = jdbcTemplate.update("DELETE FROM doucovanie WHERE id = ?", id);
+		if (deleted == 0) {
+			throw new EntityNotFoundException(id);
+		}
 		
 	}
 

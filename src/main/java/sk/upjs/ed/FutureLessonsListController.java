@@ -42,12 +42,6 @@ public class FutureLessonsListController {
 	private DoucovanieDao doucovanieDao = DaoFactory.INSTANCE.getDoucovanieDao();
 	private ObservableList<Doucovanie> doucovanieModel;
 	
-	private StudentDao studentDao = DaoFactory.INSTANCE.getStudentDao();
-	private ObservableList<Student> studentsModel;
-	
-	private DoucovatelDao doucovatelDao = DaoFactory.INSTANCE.getDoucovatelDao();
-	private ObservableList<Doucovatel> doucovateliaModel;
-	
 	private Map<String, BooleanProperty> columnsVisibility = new LinkedHashMap<>();
 	private ObjectProperty<Doucovanie> selectedDoucovanie = new SimpleObjectProperty<>();
 	
@@ -63,17 +57,7 @@ public class FutureLessonsListController {
     @FXML
     private Button deleteButton;
 
-    /*
-    private Long id;
-	private LocalDateTime zaciatok;
-	private int trvanie; // v minutach
-	private double cena;
-	private String okruh;
-	private DoucovanyPredmet predmet;
-	private Doucovatel doucovatel;
-	private String lokacia;
-	private Student student;
-	*/
+   
     @FXML
     void initialize() {
     	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getAll());
