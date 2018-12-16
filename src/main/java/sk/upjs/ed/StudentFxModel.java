@@ -49,7 +49,7 @@ public class StudentFxModel {
 		student.setEmail(getEmail());
 		student.setTelefon(getTelefon());
 		student.setAktivny(getAktivny());
-		student.getId();
+		student.setId(getId());
 		return student;
 	}
 

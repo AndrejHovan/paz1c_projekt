@@ -8,7 +8,6 @@ public class DoucovanyPredmet {
 	private String nazov;
 	private StupenStudia stupenStudia;
 	//private String odvetvie;
-	//private List<Doucovatel> doucovatelia;
 	
 	public Long getId() {
 		return id;
@@ -35,13 +34,6 @@ public class DoucovanyPredmet {
 		this.odvetvie = odvetvie;
 	}
 	*/
-	/*public List<Doucovatel> getDoucovatelia() {
-		return doucovatelia;
-	}
-
-	public void setCompanions(List<Doucovatel> doucovatelia) {
-		this.doucovatelia = doucovatelia;
-	}*/
 	
 	@Override
 	public String toString() {

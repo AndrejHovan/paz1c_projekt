@@ -1,11 +1,18 @@
 package sk.upjs.ed;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import sk.upjs.ed.entity.DoucovanyPredmet;
+import sk.upjs.ed.entity.Doucovatel;
 import sk.upjs.ed.entity.StupenStudia;
 
 public class PredmetFxModel {
@@ -33,7 +40,7 @@ public class PredmetFxModel {
 	public void setPredmet(DoucovanyPredmet dp) {
 		predmet.setNazov(dp.getNazov());
 		predmet.setStupenStudia(dp.getStupenStudia());
-		predmet.setId(dp.getId());	
+		predmet.setId(dp.getId());
 	}
 
 	public Long getId() {
@@ -63,5 +70,6 @@ public class PredmetFxModel {
 	public ObjectProperty<StupenStudia> stupenStudiaProperty() {
 		return stupenStudia;
 	}	
+
 
 }

@@ -1,4 +1,4 @@
-package sk.upjs.ed.entity;
+	package sk.upjs.ed.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
