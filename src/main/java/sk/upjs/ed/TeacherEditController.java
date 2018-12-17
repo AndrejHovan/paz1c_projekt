@@ -8,6 +8,10 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,6 +43,7 @@ public class TeacherEditController {
 	private Doucovatel doucovatel;
 	private DoucovatelFxModel doucovatelModel;
 	private ObservableList<DoucovanyPredmet> predmetyModel;
+	private ObjectProperty<DoucovanyPredmet> selectedPredmet = new SimpleObjectProperty<>();
 	private Map<String, BooleanProperty> columnsVisibility = new LinkedHashMap<>();
 
 
@@ -59,6 +64,9 @@ public class TeacherEditController {
 
     @FXML
     private Button addSubjectButton;
+    
+    @FXML
+    private Button deleteButton;
 
     public TeacherEditController(Doucovatel doucovatel) {
     	this.doucovatel = doucovatel;
@@ -70,6 +78,7 @@ public class TeacherEditController {
     void initialize() {
 
 		predmetyModel =  (ObservableList<DoucovanyPredmet>)doucovatelModel.getPredmety();//
+		deleteButton.setDisable(true);
 		
     	//stlpec pre id
     	TableColumn<DoucovanyPredmet, Long> idStlpec = new TableColumn<>("ID");
@@ -104,17 +113,27 @@ public class TeacherEditController {
 				AddSubjectController addSubjectController = 
 							new AddSubjectController(new DoucovanyPredmet(), doucovatelModel);            
 					showModalWindow(addSubjectController, "AddSubject.fxml");
-					// tento kod sa spusti az po zatvoreni okna
-					//predmetyModel.setAll(doucovatelModel.getPredmety());
-					//doucovatelDao.save(doucovatelModel.getDoucovatel());
-					//predmetyModel.setAll((ObservableList<DoucovanyPredmet>)doucovatelModel.getPredmety());
-			    	//teacherEditTableView.setItems(predmetyModel);
-
-			    	//teacherEditTableView.setItems(predmetyModel);
-
-			    	//doucovatelDao.save(doucovatelModel.getDoucovatel());
-					//teacherEditTableView.setItems(predmetyModel);
-				    //
+			}
+		});
+    	
+    	deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				List<Doucovatel> vsetciDoucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
+				int pocetDoucovatelovSPredmetom = 0;
+				for (Doucovatel d : vsetciDoucovatelia) {
+					for (DoucovanyPredmet dp : d.getPredmety()) {
+						if(dp.getId() == selectedPredmet.get().getId()) {
+							pocetDoucovatelovSPredmetom++;
+						}
+							
+					}
+					if (pocetDoucovatelovSPredmetom > 1)
+						break;
+				}
+				if(pocetDoucovatelovSPredmetom == 1)
+					predmetDao.delete(selectedPredmet.get().getId());
+				doucovatelModel.getPredmety().remove(selectedPredmet.get());
 			}
 		});
     	
@@ -123,6 +142,21 @@ public class TeacherEditController {
 			public void handle(ActionEvent event) {
 				doucovatelDao.save(doucovatelModel.getDoucovatel());
 				saveButton.getScene().getWindow().hide();
+			}
+		});
+    	
+    	teacherEditTableView.getSelectionModel().
+		selectedItemProperty().addListener(new ChangeListener<DoucovanyPredmet>() {
+			@Override
+			public void changed(ObservableValue<? extends DoucovanyPredmet> observable, 
+					DoucovanyPredmet oldValue,
+					DoucovanyPredmet newValue) {
+				if (newValue == null) {
+					deleteButton.setDisable(true);
+				} else {
+					deleteButton.setDisable(false);
+				}
+				selectedPredmet.set(newValue);
 			}
 		});
     	

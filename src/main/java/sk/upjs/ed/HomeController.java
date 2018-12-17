@@ -39,11 +39,6 @@ import javafx.util.StringConverter;
 
 
 public class HomeController {
-
-	//private boolean historySceneOpened = false;
-	
-	
-	
 	
     @FXML
     private Button historyButton;

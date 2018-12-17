@@ -122,6 +122,7 @@ public class MySqlDoucovatelDao implements DoucovatelDao {
 
 	@Override
 	public void delete(long id) throws EntityNotFoundException {
+		jdbcTemplate.update("DELETE FROM doucovanepredmety_has_doucovatel WHERE Doucovatel_idDoucovatel= ?", id);
 		int deleted = jdbcTemplate.update("DELETE FROM doucovatel WHERE id = ?", id);
 		if (deleted == 0) {
 			throw new EntityNotFoundException(id);

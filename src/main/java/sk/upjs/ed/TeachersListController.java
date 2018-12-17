@@ -58,6 +58,8 @@ public class TeachersListController {
     	doucovateliaModel = FXCollections.observableArrayList(doucovatelDao.getAll());
     	
     	editButton.setDisable(true);
+		deleteButton.setDisable(true);
+
 
     	//stlpec pre id
     	TableColumn<Doucovatel, Long> idStlpec = new TableColumn<>("ID");
@@ -127,8 +129,12 @@ public class TeachersListController {
 					Doucovatel newValue) {
 				if (newValue == null) {
 					editButton.setDisable(true);
+					deleteButton.setDisable(true);
+
 				} else {
 					editButton.setDisable(false);
+					deleteButton.setDisable(false);
+
 				}
 				selectedDoucovatel.set(newValue);
 			}

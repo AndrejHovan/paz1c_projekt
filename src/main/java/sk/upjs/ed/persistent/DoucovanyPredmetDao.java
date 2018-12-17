@@ -14,6 +14,10 @@ public interface DoucovanyPredmetDao {
 
 	void delete(long id);
 
+	List<DoucovanyPredmet> getAllForList();
+
+	Long getCurrentAI();
+
 	//DoucovanyPredmet getById(long id);
 	
 }

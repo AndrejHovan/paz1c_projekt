@@ -81,11 +81,31 @@ public class AddSubjectController {
 
 						}
     					if (!priradilId) {
-    						predmetModel.setId(vsetkyPredmety.get(vsetkyPredmety.size()-1).getId()+1);
+    						predmetModel.setId(predmetDao.getCurrentAI());
+    						
+    						/*if (vsetkyPredmety.size() == 0) {
+    							long idnove = 1;
+    							predmetModel.setId((idnove));
+    						} else {
+    							predmetModel.setId(vsetkyPredmety.get(vsetkyPredmety.size()-1).getId()+1);
+    						}*/
+    						
     					}
-       					predmetDao.add(predmetModel.getPredmet());
-       					doucovatelModel.getPredmety().add(predmetModel.getPredmet());
-       					//System.out.println(doucovatelModel.getPredmety().get(doucovatelModel.getPredmety().size()-1).toString());
+    					
+    					List<DoucovanyPredmet> predmetyDoucovatela = doucovatelModel.getPredmety();
+    					boolean nepridat = false;
+    					for (DoucovanyPredmet dp : predmetyDoucovatela) {
+							if (dp.getId() == predmetModel.getId()) {
+								nepridat = true;
+								break;
+							}
+						}
+    					if(!nepridat) {
+        					doucovatelModel.getPredmety().add(predmetModel.getPredmet());
+
+    					}
+    					predmetDao.add(predmetModel.getPredmet());
+    					//System.out.println(doucovatelModel.getPredmety().get(doucovatelModel.getPredmety().size()-1).toString());
        					//doucovatelDao.save(doucovatelModel.getDoucovatel());
        					/*List<DoucovanyPredmet> predmetyDoucovatela = doucovatelModel.getPredmety();
        					predmetyDoucovatela.add(predmetModel.getPredmet());

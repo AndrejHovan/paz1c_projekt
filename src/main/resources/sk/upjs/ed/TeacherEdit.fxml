@@ -21,5 +21,6 @@
         <columns>
         </columns>
       </TableView>
+      <Button fx:id="deleteButton" layoutX="298.0" layoutY="140.0" mnemonicParsing="false" text="Odobrať predmet" />
    </children>
 </AnchorPane>

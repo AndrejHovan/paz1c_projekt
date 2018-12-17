@@ -59,6 +59,8 @@ public class HistoryListController {
     	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getMinule());
   
     	editButton.setDisable(true);
+		deleteButton.setDisable(true);
+
     	//stlpec pre id
     	TableColumn<Doucovanie, Long> idStlpec = new TableColumn<>("ID");
     	idStlpec.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -150,8 +152,11 @@ public class HistoryListController {
 					Doucovanie newValue) {
 				if (newValue == null) {
 					editButton.setDisable(true);
+					deleteButton.setDisable(true);
+
 				} else {
 					editButton.setDisable(false);
+					deleteButton.setDisable(false);
 				}
 				selectedDoucovanie.set(newValue);
 			}

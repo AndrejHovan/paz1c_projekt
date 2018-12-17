@@ -30,7 +30,7 @@ public class SubjectsListController {
     @FXML
     void initialize() {
     	
-    	predmetModel = FXCollections.observableArrayList(predmetDao.getAll());
+    	predmetModel = FXCollections.observableArrayList(predmetDao.getAllForList());
     	
     	//stlpec pre id
     	TableColumn<DoucovanyPredmet, Long> idStlpec = new TableColumn<>("ID");
