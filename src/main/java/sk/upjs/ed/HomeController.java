@@ -63,12 +63,8 @@ public class HomeController {
 			//@Override WHAAAT?
     		//na cviceniach je override, tu ked ho dame hadze error
 			public void handle(ActionEvent event) {
-				//if(!historySceneOpened) {
 					HistoryListController historyController = new HistoryListController();            
 					showWindow(historyController, "HistoryList.fxml");
-					//historySceneOpened = true;
-				//}
-
 			}
 			
 		});
@@ -115,6 +111,7 @@ public class HomeController {
 		});
     }
     
+    //tieto okna nie su modalne
     private void showWindow(Object controller, String fxml) {
 		try {
 			FXMLLoader fxmlLoader = new	FXMLLoader(getClass().getResource(fxml));
@@ -125,9 +122,6 @@ public class HomeController {
 			Stage dialog = new Stage();
 			dialog.setScene(scene);
 			dialog.show();
-			//dialog.initModality(Modality.APPLICATION_MODAL);
-			//dialog.showAndWait();
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

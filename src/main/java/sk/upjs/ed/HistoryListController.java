@@ -56,9 +56,10 @@ public class HistoryListController {
    
     @FXML
     void initialize() {
-    	//nacitaju sa iba doucovania, ktorych zaciatok je starsi ako momentalny datum, t.j. doucovania, ktore uz prebehly
+    	//nacitaju sa iba doucovania, ktorych zaciatok je starsi ako momentalny datum, t.j. doucovania, ktore uz prebehli
     	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getMinule());
-  
+    	
+    	//na zaciatku nie je nic selectnute tak nic needitujeme
     	editButton.setDisable(true);
 		deleteButton.setDisable(true);
 
@@ -103,9 +104,7 @@ public class HistoryListController {
     	lokaciaStlpec.setCellValueFactory(new PropertyValueFactory<>("lokacia"));
     	historyTableView.getColumns().add(lokaciaStlpec);
     	columnsVisibility.put("Lokacia", lokaciaStlpec.visibleProperty());
-    	
-    	historyTableView.setItems(doucovanieModel);
-    	
+    	    	
     	//stlpec pre studenta
     	TableColumn<Doucovanie, Student> studentStlpec = new TableColumn<>("Študent");
     	studentStlpec.setCellValueFactory(new PropertyValueFactory<>("student"));
@@ -123,7 +122,9 @@ public class HistoryListController {
     	predmetStlpec.setCellValueFactory(new PropertyValueFactory<>("predmet"));
     	historyTableView.getColumns().add(predmetStlpec);
     	columnsVisibility.put("Predmet", predmetStlpec.visibleProperty());
-    	
+
+    	historyTableView.setItems(doucovanieModel);
+
     	//Tlacidlo na editaciu existujuceho doucovania
     	editButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -145,6 +146,7 @@ public class HistoryListController {
 			}
 		});
     	
+    	//ak selectneme nieco tak vieme pouzit edit a delete
     	historyTableView.getSelectionModel().
 		selectedItemProperty().addListener(new ChangeListener<Doucovanie>() {
 			@Override

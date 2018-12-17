@@ -55,7 +55,7 @@ public class MySqlDoucovatelDao implements DoucovatelDao {
 				List<Doucovatel> doucovatelia = new ArrayList<>();
 
 				List<DoucovanyPredmet> predmety = DaoFactory.INSTANCE.getPredmetDao().getAll();
-				Map<Long, DoucovanyPredmet> mojaMapa = new HashMap<>();
+				Map<Long, DoucovanyPredmet> mojaMapa = new HashMap<>(); // aby sme potom cez id rovno dostali predmet
 				for (DoucovanyPredmet dp : predmety) {
 					mojaMapa.put(dp.getId(), dp);
 				}
@@ -103,7 +103,6 @@ public class MySqlDoucovatelDao implements DoucovatelDao {
 					doucovatel.getId());
 			insertDoucovanyPredmet(doucovatel);
 		}
-
 	}
 	
 	private void insertDoucovanyPredmet(Doucovatel doucovatel) {

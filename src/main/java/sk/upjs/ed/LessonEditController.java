@@ -157,7 +157,7 @@ public class LessonEditController {
 					predmetModel.setPredmet(newValue);
 					doucovanieModel.setPredmet(predmetModel.getPredmet());
 					boloUpdatenute = true;
-					//update, aby boli nacitani iba ti doucovatelia, ktory dokazu doucit dany predmet?
+					//update, aby boli nacitani iba ti doucovatelia, ktory dokazu doucit dany predmet
 					UpdateDoucovatelov();
 				}
 			}
@@ -166,7 +166,7 @@ public class LessonEditController {
 		// comboBox pre vyber doucovatelov
 		//Tento mi treba vysvetlit a poriadne okomentovat
 		//je zlozitejsi, pretoze ponuka iba doucovateloch schopnych doucit vybrany predmet
-		if(!boloUpdatenute) { //iba nazaciatku potom sa robi UpdateDoucovatelov().. asi sa to da aj krajsie
+		if(!boloUpdatenute) { //iba nazaciatku toto zbehne potom sa robi UpdateDoucovatelov().. asi sa to da aj krajsie
 			doucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
 			doucovatelia.clear();
 			List<Doucovatel> vsetciDoucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
@@ -194,15 +194,13 @@ public class LessonEditController {
 			public void changed(ObservableValue<? extends Doucovatel> observable, Doucovatel oldValue,
 					Doucovatel newValue) {
 				if (newValue != null) {
-					//DoucovatelFxModel doucovatelModelTemp = new DoucovatelFxModel(newValue);
 					doucovatelModel.setDoucovatel(newValue);
-					//doucovatelModel = doucovatelModelTemp;
 					doucovanieModel.setDoucovatel(doucovatelModel.getDoucovatel());
 				}
 			}
 		});
 		
-		//bindovanie hodnot - treba mi trochu vysvetlit, aby som poznal spravne slova
+		//bindovanie hodnot
 		durationTextField.textProperty().bindBidirectional(doucovanieModel.trvanieProperty(),
 				new NumberStringConverter());
 		fieldTextField.textProperty().bindBidirectional(doucovanieModel.okruhProperty());

@@ -66,6 +66,8 @@ public class AddSubjectController {
     			});
     			predmetTextField.textProperty().bindBidirectional(predmetModel.nazovProperty());
     	    	
+    			//ak ten predmet uz existuje v databaze tak mi vrati prave ten predmet a ten ulozi prislusnemu
+    			//doucovatelovi.. je medzi nimi vztah Doucovatel ma list predmetov
     	    	addButton.setOnAction(new EventHandler<ActionEvent>() {
     				@Override
     				public void handle(ActionEvent event) {
@@ -75,23 +77,15 @@ public class AddSubjectController {
     						if (predmetModel.getNazov().equals(dp.getNazov()) && predmetModel.getStupenStudia() == dp.getStupenStudia()) {
     							predmetModel.setId(dp.getId());
     							priradilId = true;
-    							//System.out.println(predmetModel.getPredmet().toString());
     							break;
     						}
 
 						}
     					if (!priradilId) {
+    						//ak tam nie je tak zober dalsie ID v poradi a pridaj to tam s novym ID
     						predmetModel.setId(predmetDao.getCurrentAI());
-    						
-    						/*if (vsetkyPredmety.size() == 0) {
-    							long idnove = 1;
-    							predmetModel.setId((idnove));
-    						} else {
-    							predmetModel.setId(vsetkyPredmety.get(vsetkyPredmety.size()-1).getId()+1);
-    						}*/
-    						
     					}
-    					
+    					//ak doucovatel presne taky predmet uz ma tak ho uz nepridavajme 
     					List<DoucovanyPredmet> predmetyDoucovatela = doucovatelModel.getPredmety();
     					boolean nepridat = false;
     					for (DoucovanyPredmet dp : predmetyDoucovatela) {
@@ -104,12 +98,8 @@ public class AddSubjectController {
         					doucovatelModel.getPredmety().add(predmetModel.getPredmet());
 
     					}
-    					predmetDao.add(predmetModel.getPredmet());
-    					//System.out.println(doucovatelModel.getPredmety().get(doucovatelModel.getPredmety().size()-1).toString());
-       					//doucovatelDao.save(doucovatelModel.getDoucovatel());
-       					/*List<DoucovanyPredmet> predmetyDoucovatela = doucovatelModel.getPredmety();
-       					predmetyDoucovatela.add(predmetModel.getPredmet());
-       					doucovatelModel.setPredmety(predmetyDoucovatela);*/
+    					predmetDao.add(predmetModel.getPredmet()); //prida len v pripade ze to tam nie je.. 
+    					//pozri .add metodu v DAO
     					addButton.getScene().getWindow().hide();
     				}
     			});

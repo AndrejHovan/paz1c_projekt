@@ -77,7 +77,7 @@ public class MySqlDoucovanyPredmetDao implements DoucovanyPredmetDao {
 	@Override
 	public List<DoucovanyPredmet> getAllForList() {
 		String sql = "SELECT id, Nazov, StupenStudia, doucovanepredmety_has_doucovatel.doucovanepredmety_iddoucovanepredmety "
-				+ "FROM doucovanepredmety " + "RIGHT JOIN doucovanepredmety_has_doucovatel "
+				+ "FROM doucovanepredmety " + "I JOIN doucovanepredmety_has_doucovatel "
 				+ "ON id = doucovanepredmety_has_doucovatel.doucovanepredmety_iddoucovanepredmety " + "ORDER BY id";
 		// List<DoucovanyPredmet> predmety = jdbcTemplate.query(sql, new
 		// BeanPropertyRowMapper<>(DoucovanyPredmet.class));

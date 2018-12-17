@@ -69,14 +69,16 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 				doucovanie.setCena(Double.parseDouble(rs.getString("cena")));
 				doucovanie.setOkruh(rs.getString("okruh"));
 				doucovanie.setLokacia(rs.getString("lokacia"));
+				//vezmeme si vsetkych studentov a najdeme prave toho, ktoreho ma to doucovanie
 				List<Student> vsetciStudenti = DaoFactory.INSTANCE.getStudentDao().getAll();
 				long idStudenta = rs.getLong("Student_idStudent");
-				for (Student student : vsetciStudenti) {
+				for (Student student : vsetciStudenti) { 
 					if (student.getId() == idStudenta) {
 						doucovanie.setStudent(student);
 						break;
 					}
 				}
+				//to iste s doucovatelom
 				List<Doucovatel> vsetciDoucovatelia = DaoFactory.INSTANCE.getDoucovatelDao().getAll();
 				long idDoucovatela = rs.getLong("doucovatel_id");
 				for (Doucovatel doucovatel : vsetciDoucovatelia) {
@@ -85,6 +87,7 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 						break;
 					}
 				}
+				//to iste s predmetmi
 				List<DoucovanyPredmet> vsetkyPredmety = DaoFactory.INSTANCE.getPredmetDao().getAll();
 				long idPredmetu = rs.getLong("DoucovanePredmety_idDoucovanePredmety");
 				for (DoucovanyPredmet predmet : vsetkyPredmety) {
@@ -92,14 +95,7 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 						doucovanie.setPredmet(predmet);
 						break;
 					}
-				} /*
-					 * doucovanie.setStudent(DaoFactory.INSTANCE.getStudentDao().getById(rs.getLong(
-					 * "Student_idStudent")));
-					 * doucovanie.setPredmet(DaoFactory.INSTANCE.getPredmetDao().getById(rs.getLong(
-					 * "DoucovanePredmety_idDoucovanePredmety")));
-					 * doucovanie.setDoucovatel(DaoFactory.INSTANCE.getDoucovatelDao().getById(rs.
-					 * getLong("doucovatel_id")));
-					 */
+				} 
 				return doucovanie;
 			}
 		});
@@ -131,9 +127,10 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 		}
 
 	}
-
+	// to iste co get all len sa odfiltruju doucovania ktore este neboli
 	@Override
 	public List<Doucovanie> getMinule() {
+		//LEFT JOIN na fetch id ostatnych entit
 		String sql = "SELECT doucovanie.id, doucovanie.Zaciatok, doucovanie.Trvanie, doucovanie.Cas, "
 				+ "doucovanie.Cena, doucovanie.Okruh, doucovanie.Lokacia, doucovanie.Student_idStudent "
 				+ ", doucovanie.DoucovanePredmety_idDoucovanePredmety, doucovanie.doucovatel_id  FROM doucovanie "
@@ -145,8 +142,6 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 			@Override
 			public Doucovanie mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Doucovanie doucovanie = new Doucovanie();
-				// if(doucovanie.getZaciatok().isAfter(LocalDate.now()))
-				// return null;
 				doucovanie.setId(rs.getLong("id"));
 				doucovanie.setZaciatok(LocalDate.parse(rs.getString("zaciatok")));
 				doucovanie.setTrvanie(Integer.parseInt(rs.getString("trvanie")));
@@ -177,17 +172,10 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 						doucovanie.setPredmet(predmet);
 						break;
 					}
-				} /*
-					 * doucovanie.setStudent(DaoFactory.INSTANCE.getStudentDao().getById(rs.getLong(
-					 * "Student_idStudent")));
-					 * doucovanie.setPredmet(DaoFactory.INSTANCE.getPredmetDao().getById(rs.getLong(
-					 * "DoucovanePredmety_idDoucovanePredmety")));
-					 * doucovanie.setDoucovatel(DaoFactory.INSTANCE.getDoucovatelDao().getById(rs.
-					 * getLong("doucovatel_id")));
-					 */
+				} 
 				return doucovanie;
 			}
-		});
+		});//filtracia
 		List<Doucovanie> naZmazanie = new ArrayList<Doucovanie>();
 		for (Doucovanie d : doucovania)
 			if (d.getZaciatok().isAfter(LocalDate.now()))
@@ -196,6 +184,7 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 		return doucovania;
 	}
 
+	// skoro to iste ako getMinule len na konci je .isBefore
 	@Override
 	public List<Doucovanie> getBuduce() {
 		String sql = "SELECT doucovanie.id, doucovanie.Zaciatok, doucovanie.Trvanie, doucovanie.Cas, "
@@ -239,14 +228,7 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 						doucovanie.setPredmet(predmet);
 						break;
 					}
-				} /*
-					 * doucovanie.setStudent(DaoFactory.INSTANCE.getStudentDao().getById(rs.getLong(
-					 * "Student_idStudent")));
-					 * doucovanie.setPredmet(DaoFactory.INSTANCE.getPredmetDao().getById(rs.getLong(
-					 * "DoucovanePredmety_idDoucovanePredmety")));
-					 * doucovanie.setDoucovatel(DaoFactory.INSTANCE.getDoucovatelDao().getById(rs.
-					 * getLong("doucovatel_id")));
-					 */
+				} 
 				return doucovanie;
 			}
 		});

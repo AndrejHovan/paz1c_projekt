@@ -44,7 +44,7 @@ public class FutureLessonsListController {
 	//list doucovani
 	private ObservableList<Doucovanie> doucovanieModel;
 	
-	//toto potrebujem vediet vysvetlit
+	//Mapa ktora urcuje ktore stlpce lessonsTableView su viditelne
 	private Map<String, BooleanProperty> columnsVisibility = new LinkedHashMap<>();
 	//zvolene doucovanie
 	private ObjectProperty<Doucovanie> selectedDoucovanie = new SimpleObjectProperty<>();
@@ -69,6 +69,7 @@ public class FutureLessonsListController {
 		
     	//tlacidlo editacie je disabled kym sa neoznaci doucovanie
     	editButton.setDisable(true);
+    	deleteButton.setDisable(true);
     	
     	//stlpec pre id
     	TableColumn<Doucovanie, Long> idStlpec = new TableColumn<>("ID");
@@ -114,10 +115,6 @@ public class FutureLessonsListController {
     	lessonsTableView.getColumns().add(lokaciaStlpec);
     	columnsVisibility.put("Lokacia", lokaciaStlpec.visibleProperty());
     	
-    	//nastavy hodnoty v tabulke, ktore sme nacitali z databazy
-    	//nevadi, ze to je tu? nema to byt az potom ako su vsetky stlpce urobene?
-    	lessonsTableView.setItems(doucovanieModel);
-    	
     	//stlpec pre studenta
     	TableColumn<Doucovanie, Student> studentStlpec = new TableColumn<>("Študent");
     	studentStlpec.setCellValueFactory(new PropertyValueFactory<>("student"));
@@ -135,6 +132,9 @@ public class FutureLessonsListController {
     	predmetStlpec.setCellValueFactory(new PropertyValueFactory<>("predmet"));
     	lessonsTableView.getColumns().add(predmetStlpec);
     	columnsVisibility.put("Predmet", predmetStlpec.visibleProperty());
+    	
+    	//nastavy hodnoty v tabulke, ktore sme nacitali z databazy
+    	lessonsTableView.setItems(doucovanieModel);
     	    	    	    	
     	//Tlacidlo na pridanie doucovania
     	addButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -162,7 +162,7 @@ public class FutureLessonsListController {
 			}
 		});
     	
-    	//Vyzmazat doucovanie zo zoznamu
+    	//Vymazat doucovanie zo zoznamu
     	deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -183,9 +183,11 @@ public class FutureLessonsListController {
 				if (newValue == null) {
 					//ak nie je nic selectnute, tlacidlo editacie je disabled
 					editButton.setDisable(true);
+					deleteButton.setDisable(true);
 				} else {
 					//ak mame vybrate doucovanie, je mozne kliknut na tlacidlo editacie
 					editButton.setDisable(false);
+					deleteButton.setDisable(false);
 				}
 				selectedDoucovanie.set(newValue);
 			}

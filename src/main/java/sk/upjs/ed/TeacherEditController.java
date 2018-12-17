@@ -40,7 +40,6 @@ public class TeacherEditController {
 
 	private DoucovanyPredmetDao predmetDao = DaoFactory.INSTANCE.getPredmetDao();
 	private DoucovatelDao doucovatelDao = DaoFactory.INSTANCE.getDoucovatelDao();
-	private Doucovatel doucovatel;
 	private DoucovatelFxModel doucovatelModel;
 	private ObservableList<DoucovanyPredmet> predmetyModel;
 	private ObjectProperty<DoucovanyPredmet> selectedPredmet = new SimpleObjectProperty<>();
@@ -69,7 +68,6 @@ public class TeacherEditController {
     private Button deleteButton;
 
     public TeacherEditController(Doucovatel doucovatel) {
-    	this.doucovatel = doucovatel;
     	this.doucovatelModel = new DoucovatelFxModel(doucovatel);
     	
     }
@@ -116,7 +114,6 @@ public class TeacherEditController {
 			}
 		});
     	
-    	//Toto poriadne vysvetlit
     	deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {

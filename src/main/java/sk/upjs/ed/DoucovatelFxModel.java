@@ -29,7 +29,7 @@ public class DoucovatelFxModel {
 		setMeno(doucovatel.getMeno());
 		setPriezvisko(doucovatel.getPriezvisko());
 		setAktivny(doucovatel.isAktivny());
-		//inak null List a to je nedobre.. 
+		//inak null List a to je nedobre..  sa zda
 		if (doucovatel.getPredmety() != null) {
 			setPredmety(doucovatel.getPredmety());
 		}else {
