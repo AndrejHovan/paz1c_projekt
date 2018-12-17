@@ -17,6 +17,7 @@ public class App extends Application
 {
 	public void start(Stage primaryStage) throws Exception {
 			
+		//zapina sa prva scena
 		HomeController mainController	= new HomeController();            
 		FXMLLoader fxmlLoader = new	FXMLLoader(getClass().getResource("Home.fxml"));
 		fxmlLoader.setController(mainController);

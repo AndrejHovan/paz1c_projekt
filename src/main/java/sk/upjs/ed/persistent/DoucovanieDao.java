@@ -11,10 +11,10 @@ public interface DoucovanieDao {
 
 	List<Doucovanie> getAll();
 	
-	//malo by getnut vsetky doucovania STARSIE ako momentalny cas
+	//malo by getnut vsetky doucovania STARSIE ako momentalny datum
 	List<Doucovanie> getMinule(); 
 
-	//malo by getnut vsetky doucovania NOVSIE ako momentalny cas
+	//malo by getnut vsetky doucovania NOVSIE ako momentalny datum
 	List<Doucovanie> getBuduce(); 	
 	
 	void save(Doucovanie doucovanie);

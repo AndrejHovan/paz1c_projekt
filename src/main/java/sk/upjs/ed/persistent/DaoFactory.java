@@ -37,14 +37,7 @@ INSTANCE;
 		return predmetDao;
 	}
 	
-	
-	/*public WorkshopDao getWorkshopDao() {
-		if (workshopDao == null) {
-			workshopDao = new MysqlWorkshopDao(getJdbcTemplate());
-		}
-		return workshopDao;
-	}*/
-	
+		
 	private JdbcTemplate getJdbcTemplate() {
 		if (jdbcTemplate == null) {
 			MysqlDataSource dataSource = new MysqlDataSource();

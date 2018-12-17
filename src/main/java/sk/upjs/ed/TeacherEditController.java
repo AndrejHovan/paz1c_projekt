@@ -116,11 +116,14 @@ public class TeacherEditController {
 			}
 		});
     	
+    	//Toto poriadne vysvetlit
     	deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				List<Doucovatel> vsetciDoucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
 				int pocetDoucovatelovSPredmetom = 0;
+				//Ak mazeme predmet doucovatelovi a tento doucovatel je jediny, kto uci dany predmet, treba
+				//ho zmazat aj zo zoznamu doucovanych predmetov
 				for (Doucovatel d : vsetciDoucovatelia) {
 					for (DoucovanyPredmet dp : d.getPredmety()) {
 						if(dp.getId() == selectedPredmet.get().getId()) {
@@ -131,8 +134,11 @@ public class TeacherEditController {
 					if (pocetDoucovatelovSPredmetom > 1)
 						break;
 				}
+				//Ak bol tento doucovatel naozaj jediny, mazeme predmet zo zoznamu predmetov
 				if(pocetDoucovatelovSPredmetom == 1)
 					predmetDao.delete(selectedPredmet.get().getId());
+				
+				//Tak ci tak predmet mazeme danemu doucovatelovi
 				doucovatelModel.getPredmety().remove(selectedPredmet.get());
 			}
 		});

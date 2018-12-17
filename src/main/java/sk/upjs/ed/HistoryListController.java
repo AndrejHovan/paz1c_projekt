@@ -56,6 +56,7 @@ public class HistoryListController {
    
     @FXML
     void initialize() {
+    	//nacitaju sa iba doucovania, ktorych zaciatok je starsi ako momentalny datum, t.j. doucovania, ktore uz prebehly
     	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getMinule());
   
     	editButton.setDisable(true);

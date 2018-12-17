@@ -113,16 +113,18 @@ public class LessonEditController {
 		// comboBox pre vyber studentov
 		studenti = FXCollections.observableArrayList(studentDao.getAll());
 		studentComboBox.setItems(studenti);
-
+		//defaultna hodnota comboBoxu
 		studentComboBox.getSelectionModel().select(studenti.get(0));
 		if(studentModel == null) {
 			studentModel = new StudentFxModel(studenti.get(0));
 
 		}
+		//nasetujeme doucovaniu studenta
 		doucovanieModel.setStudent(studentModel.getStudent());
-
+		
+		//implementuje moznost zmeny hodnoty comboBoxu
 		studentComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
-
+			//implementovana metoda pre ChangeListener
 			@Override
 			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
 				if (newValue != null) {
@@ -133,16 +135,9 @@ public class LessonEditController {
 			}
 		});
 
-		/*
-		 * if (!studenti.isEmpty()) {
-		 * studentComboBox.getSelectionModel().select(studenti.get(0)); }
-		 */
-		/*
-		 * if (!doucovatelia.isEmpty()) {
-		 * teacherComboBox.getSelectionModel().select(doucovatelia.get(0)); }
-		 */
+		
 
-		// comboBox pre vyber predmetov
+		// comboBox pre vyber predmetov, analogicky predoslemu ComboBoxu
 		predmety = FXCollections.observableArrayList(predmetDao.getAll());
 		subjectComboBox.setItems(predmety);
 
@@ -150,8 +145,7 @@ public class LessonEditController {
 			predmetModel = new PredmetFxModel(predmety.get(0));
 			subjectComboBox.getSelectionModel().select(predmety.get(0));
 			doucovanieModel.setPredmet(predmetModel.getPredmet());
-			//UpdateDoucovatelov();
-			System.out.println("Som null");
+			
 		}
 
 		subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<DoucovanyPredmet>() {
@@ -163,13 +157,15 @@ public class LessonEditController {
 					predmetModel.setPredmet(newValue);
 					doucovanieModel.setPredmet(predmetModel.getPredmet());
 					boloUpdatenute = true;
+					//update, aby boli nacitani iba ti doucovatelia, ktory dokazu doucit dany predmet?
 					UpdateDoucovatelov();
 				}
 			}
 		});
 
 		// comboBox pre vyber doucovatelov
-		
+		//Tento mi treba vysvetlit a poriadne okomentovat
+		//je zlozitejsi, pretoze ponuka iba doucovateloch schopnych doucit vybrany predmet
 		if(!boloUpdatenute) { //iba nazaciatku potom sa robi UpdateDoucovatelov().. asi sa to da aj krajsie
 			doucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
 			doucovatelia.clear();
@@ -206,8 +202,7 @@ public class LessonEditController {
 			}
 		});
 		
-		// toto by malo spravne konvertovat int property na string, podobne neskor s
-		// double property
+		//bindovanie hodnot - treba mi trochu vysvetlit, aby som poznal spravne slova
 		durationTextField.textProperty().bindBidirectional(doucovanieModel.trvanieProperty(),
 				new NumberStringConverter());
 		fieldTextField.textProperty().bindBidirectional(doucovanieModel.okruhProperty());
@@ -216,6 +211,7 @@ public class LessonEditController {
 		startDatePicker.valueProperty().bindBidirectional(doucovanieModel.zaciatokProperty());
 		timeTextField.textProperty().bindBidirectional(doucovanieModel.casProperty());
 
+		//tlacidlo na ulozenie
 		saveButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -224,6 +220,7 @@ public class LessonEditController {
 			}
 		});
 		
+		//tlacidlo na vycistenie controllera
 		clearButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -236,6 +233,7 @@ public class LessonEditController {
 			}
 		});
 		
+		//pridat doucovanie ako nove
 		addAsNewButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -246,11 +244,15 @@ public class LessonEditController {
 
 	}
 
+	//metoda, ktora zaistuje, aby comboBox pre doucovatelov zobrazil iba tych, ktori su schopny doucit vybrany predmet
 	private void UpdateDoucovatelov() {
 		doucovatelia.clear();
 		List<Doucovatel> vsetciDoucovatelia = FXCollections.observableArrayList(doucovatelDao.getAll());
+		//hlada sa, ci sa v kompetenciach doucovatela nachadza dany predmet na danom stupni studia
+		//ak ano, tak sa prida k relevantnym doucovatelom
 		for (Doucovatel d : vsetciDoucovatelia) {
 			for (int i = 0; i < d.getPredmety().size(); i++) {
+				//mozno by bolo jasnejsie, keby predmetModel bol vstup do funkcie
 				if (predmetModel.getPredmet().getNazov().equals(d.getPredmety().get(i).getNazov())
 						&& predmetModel.getStupenStudia() == d.getPredmety().get(i).getStupenStudia()) {
 					doucovatelia.add(d);
@@ -259,6 +261,7 @@ public class LessonEditController {
 				}
 			}
 		}
+		//teraz sa do comboBoxu nasetuju relevantni doucovatelia
 		teacherComboBox.setItems(doucovatelia);
 		if(doucovatelia.size() > 0) {
 			teacherComboBox.getSelectionModel().select(doucovatelia.get(0));

@@ -41,9 +41,12 @@ import sk.upjs.ed.persistent.StudentDao;
 public class FutureLessonsListController {
 
 	private DoucovanieDao doucovanieDao = DaoFactory.INSTANCE.getDoucovanieDao();
+	//list doucovani
 	private ObservableList<Doucovanie> doucovanieModel;
 	
+	//toto potrebujem vediet vysvetlit
 	private Map<String, BooleanProperty> columnsVisibility = new LinkedHashMap<>();
+	//zvolene doucovanie
 	private ObjectProperty<Doucovanie> selectedDoucovanie = new SimpleObjectProperty<>();
 	
     @FXML
@@ -61,18 +64,18 @@ public class FutureLessonsListController {
    
     @FXML
     void initialize() {
+    	//natiahnu sa z databazi vsetky doucovania novsie ako dnesny datum
     	doucovanieModel = FXCollections.observableArrayList(doucovanieDao.getBuduce());
-    	
-    	//for (Doucovanie d : doucovanieModel) 
-			//if(d.getZaciatok().isBefore(LocalDate.now()))
-				//doucovanieModel.remove(d);
 		
-    	
+    	//tlacidlo editacie je disabled kym sa neoznaci doucovanie
     	editButton.setDisable(true);
+    	
     	//stlpec pre id
     	TableColumn<Doucovanie, Long> idStlpec = new TableColumn<>("ID");
     	idStlpec.setCellValueFactory(new PropertyValueFactory<>("id"));
+    	//tu sa prida stlpec na id
     	lessonsTableView.getColumns().add(idStlpec);
+    	//tu sa nastavi, ze je to viditelne predpokladam
     	columnsVisibility.put("ID", idStlpec.visibleProperty());
 
     	//stlpec pre zaciatok
@@ -111,6 +114,8 @@ public class FutureLessonsListController {
     	lessonsTableView.getColumns().add(lokaciaStlpec);
     	columnsVisibility.put("Lokacia", lokaciaStlpec.visibleProperty());
     	
+    	//nastavy hodnoty v tabulke, ktore sme nacitali z databazy
+    	//nevadi, ze to je tu? nema to byt az potom ako su vsetky stlpce urobene?
     	lessonsTableView.setItems(doucovanieModel);
     	
     	//stlpec pre studenta
@@ -130,25 +135,17 @@ public class FutureLessonsListController {
     	predmetStlpec.setCellValueFactory(new PropertyValueFactory<>("predmet"));
     	lessonsTableView.getColumns().add(predmetStlpec);
     	columnsVisibility.put("Predmet", predmetStlpec.visibleProperty());
-    	
-    	
-    	/*
-    	//stlpec pre stupen studia trosku komplikovanejsie lebo Enum
-    	TableColumn<Doucovanie, StupenStudia> stupenStudiaStlpec = new TableColumn<>("Stupeň Štúdia");
-    	stupenStudiaStlpec.setCellValueFactory(new PropertyValueFactory<>("StupenStudia"));
-    	lessonsTableView.getColumns().add(stupenStudiaStlpec);
-    	columnsVisibility.put("Stupeň štúdia", stupenStudiaStlpec.visibleProperty());
-    
-    	*/
-    	
+    	    	    	    	
     	//Tlacidlo na pridanie doucovania
     	addButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				//po kliknuti sa otvori modalne okno na pridavanie / editovanie doucovania
 				LessonEditController editController = 
 							new LessonEditController(new Doucovanie());            
 					showModalWindow(editController, "LessonEdit.fxml");
 					// tento kod sa spusti az po zatvoreni okna
+					//nacitaju sa opat vsetky doucovania
 					doucovanieModel.setAll(doucovanieDao.getBuduce());
 			}
 		});
@@ -169,11 +166,14 @@ public class FutureLessonsListController {
     	deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				//z databazy sa vymaze doucovanie s danym ID
 				doucovanieDao.delete(selectedDoucovanie.get().getId());
+				//opat sa nacitaju doucovania, uz bez vymazanej polozky
 				doucovanieModel.setAll(doucovanieDao.getBuduce());
 			}
 		});
     	
+    	//selectovanie doucovani
     	lessonsTableView.getSelectionModel().
 		selectedItemProperty().addListener(new ChangeListener<Doucovanie>() {
 			@Override
@@ -181,8 +181,10 @@ public class FutureLessonsListController {
 					Doucovanie oldValue,
 					Doucovanie newValue) {
 				if (newValue == null) {
+					//ak nie je nic selectnute, tlacidlo editacie je disabled
 					editButton.setDisable(true);
 				} else {
+					//ak mame vybrate doucovanie, je mozne kliknut na tlacidlo editacie
 					editButton.setDisable(false);
 				}
 				selectedDoucovanie.set(newValue);
@@ -190,6 +192,7 @@ public class FutureLessonsListController {
 		});
     }
     
+    //metoda na otvorenie modalneho okna zvolenej sceny
     private void showModalWindow(Object controller, String fxml) {
 		try {
 			FXMLLoader fxmlLoader = new	FXMLLoader(getClass().getResource(fxml));

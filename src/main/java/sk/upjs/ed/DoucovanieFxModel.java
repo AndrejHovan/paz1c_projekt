@@ -30,9 +30,9 @@ public class DoucovanieFxModel {
 	private StringProperty lokacia = new SimpleStringProperty();
 	private StringProperty okruh = new SimpleStringProperty();
 	private StringProperty cas = new SimpleStringProperty();
-	private ObjectProperty<Student> student = new SimpleObjectProperty<Student>(); //spravne?
-	private ObjectProperty<Doucovatel> doucovatel = new SimpleObjectProperty<Doucovatel>(); //spravne?
-	private ObjectProperty<DoucovanyPredmet> predmet = new SimpleObjectProperty<DoucovanyPredmet>(); //spravne?
+	private ObjectProperty<Student> student = new SimpleObjectProperty<Student>(); 
+	private ObjectProperty<Doucovatel> doucovatel = new SimpleObjectProperty<Doucovatel>(); 
+	private ObjectProperty<DoucovanyPredmet> predmet = new SimpleObjectProperty<DoucovanyPredmet>(); 
 	
 	
 	
