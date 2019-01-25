@@ -138,7 +138,7 @@ public class LessonEditController {
 		
 
 		// comboBox pre vyber predmetov, analogicky predoslemu ComboBoxu
-		predmety = FXCollections.observableArrayList(predmetDao.getAll());
+		predmety = FXCollections.observableArrayList(predmetDao.getAllForList());
 		subjectComboBox.setItems(predmety);
 
 		if (predmetModel == null) {

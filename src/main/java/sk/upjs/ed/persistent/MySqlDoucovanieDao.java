@@ -127,7 +127,64 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 		}
 
 	}
+	
+	@Override
+	public List<Doucovanie> getMinule() {
+		String sql = "SELECT doucovanie.id, doucovanie.Zaciatok, doucovanie.Trvanie, doucovanie.Cas, "
+				+ "doucovanie.Cena, doucovanie.Okruh, doucovanie.Lokacia, doucovanie.Student_idStudent "
+				+ ", doucovanie.DoucovanePredmety_idDoucovanePredmety, doucovanie.doucovatel_id  FROM doucovanie "
+				+ "LEFT JOIN doucovatel ON doucovatel_id = doucovatel.id "
+				+ "LEFT JOIN student ON Student_idStudent = student.id "
+				+ "LEFT JOIN doucovanepredmety ON DoucovanePredmety_idDoucovanePredmety = doucovanepredmety.id "
+				+ "WHERE doucovanie.Zaciatok < CURDATE()";
+		return jdbcTemplate.query(sql, new RowMapper<Doucovanie>() {
+
+			@Override
+			public Doucovanie mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Doucovanie doucovanie = new Doucovanie();
+				doucovanie.setId(rs.getLong("id"));
+				doucovanie.setZaciatok(LocalDate.parse(rs.getString("zaciatok")));
+				doucovanie.setTrvanie(Integer.parseInt(rs.getString("trvanie")));
+				doucovanie.setCas(rs.getString("cas"));
+				doucovanie.setCena(Double.parseDouble(rs.getString("cena")));
+				doucovanie.setOkruh(rs.getString("okruh"));
+				doucovanie.setLokacia(rs.getString("lokacia"));
+				//vezmeme si vsetkych studentov a najdeme prave toho, ktoreho ma to doucovanie
+				List<Student> vsetciStudenti = DaoFactory.INSTANCE.getStudentDao().getAll();
+				long idStudenta = rs.getLong("Student_idStudent");
+				for (Student student : vsetciStudenti) { 
+					if (student.getId() == idStudenta) {
+						doucovanie.setStudent(student);
+						break;
+					}
+				}
+				//to iste s doucovatelom
+				List<Doucovatel> vsetciDoucovatelia = DaoFactory.INSTANCE.getDoucovatelDao().getAll();
+				long idDoucovatela = rs.getLong("doucovatel_id");
+				for (Doucovatel doucovatel : vsetciDoucovatelia) {
+					if (doucovatel.getId() == idDoucovatela) {
+						doucovanie.setDoucovatel(doucovatel);
+						break;
+					}
+				}
+				//to iste s predmetmi
+				List<DoucovanyPredmet> vsetkyPredmety = DaoFactory.INSTANCE.getPredmetDao().getAll();
+				long idPredmetu = rs.getLong("DoucovanePredmety_idDoucovanePredmety");
+				for (DoucovanyPredmet predmet : vsetkyPredmety) {
+					if (predmet.getId() == idPredmetu) {
+						doucovanie.setPredmet(predmet);
+						break;
+					}
+				} 
+				return doucovanie;
+			}
+		});
+	}
+	
+
+	
 	// to iste co get all len sa odfiltruju doucovania ktore este neboli
+	/*
 	@Override
 	public List<Doucovanie> getMinule() {
 		//LEFT JOIN na fetch id ostatnych entit
@@ -183,7 +240,62 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 		doucovania.removeAll(naZmazanie);
 		return doucovania;
 	}
+	*/
+	@Override
+	public List<Doucovanie> getBuduce() {
+		String sql = "SELECT doucovanie.id, doucovanie.Zaciatok, doucovanie.Trvanie, doucovanie.Cas, "
+				+ "doucovanie.Cena, doucovanie.Okruh, doucovanie.Lokacia, doucovanie.Student_idStudent "
+				+ ", doucovanie.DoucovanePredmety_idDoucovanePredmety, doucovanie.doucovatel_id  FROM doucovanie "
+				+ "LEFT JOIN doucovatel ON doucovatel_id = doucovatel.id "
+				+ "LEFT JOIN student ON Student_idStudent = student.id "
+				+ "LEFT JOIN doucovanepredmety ON DoucovanePredmety_idDoucovanePredmety = doucovanepredmety.id "
+				+ "WHERE doucovanie.Zaciatok >= CURDATE()";
+		return jdbcTemplate.query(sql, new RowMapper<Doucovanie>() {
 
+			@Override
+			public Doucovanie mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Doucovanie doucovanie = new Doucovanie();
+				doucovanie.setId(rs.getLong("id"));
+				doucovanie.setZaciatok(LocalDate.parse(rs.getString("zaciatok")));
+				doucovanie.setTrvanie(Integer.parseInt(rs.getString("trvanie")));
+				doucovanie.setCas(rs.getString("cas"));
+				doucovanie.setCena(Double.parseDouble(rs.getString("cena")));
+				doucovanie.setOkruh(rs.getString("okruh"));
+				doucovanie.setLokacia(rs.getString("lokacia"));
+				//vezmeme si vsetkych studentov a najdeme prave toho, ktoreho ma to doucovanie
+				List<Student> vsetciStudenti = DaoFactory.INSTANCE.getStudentDao().getAll();
+				long idStudenta = rs.getLong("Student_idStudent");
+				for (Student student : vsetciStudenti) { 
+					if (student.getId() == idStudenta) {
+						doucovanie.setStudent(student);
+						break;
+					}
+				}
+				//to iste s doucovatelom
+				List<Doucovatel> vsetciDoucovatelia = DaoFactory.INSTANCE.getDoucovatelDao().getAll();
+				long idDoucovatela = rs.getLong("doucovatel_id");
+				for (Doucovatel doucovatel : vsetciDoucovatelia) {
+					if (doucovatel.getId() == idDoucovatela) {
+						doucovanie.setDoucovatel(doucovatel);
+						break;
+					}
+				}
+				//to iste s predmetmi
+				List<DoucovanyPredmet> vsetkyPredmety = DaoFactory.INSTANCE.getPredmetDao().getAll();
+				long idPredmetu = rs.getLong("DoucovanePredmety_idDoucovanePredmety");
+				for (DoucovanyPredmet predmet : vsetkyPredmety) {
+					if (predmet.getId() == idPredmetu) {
+						doucovanie.setPredmet(predmet);
+						break;
+					}
+				} 
+				return doucovanie;
+			}
+		});
+
+	}
+
+	/*
 	// skoro to iste ako getMinule len na konci je .isBefore
 	@Override
 	public List<Doucovanie> getBuduce() {
@@ -239,5 +351,5 @@ public class MySqlDoucovanieDao implements DoucovanieDao {
 		doucovania.removeAll(naZmazanie);
 		return doucovania;
 	}
-
+	*/
 }
