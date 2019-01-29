@@ -9,6 +9,7 @@ public class DoucovanyPredmet {
 	private StupenStudia stupenStudia;
 	//private String odvetvie;
 	
+	
 	public Long getId() {
 		return id;
 	}
@@ -27,6 +28,7 @@ public class DoucovanyPredmet {
 	public void setStupenStudia(StupenStudia stupenStudia) {
 		this.stupenStudia = stupenStudia;
 	}
+
 	/*public String getOdvetvie() {
 		return odvetvie;
 	}

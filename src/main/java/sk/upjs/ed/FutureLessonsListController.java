@@ -115,21 +115,21 @@ public class FutureLessonsListController {
     	lessonsTableView.getColumns().add(lokaciaStlpec);
     	columnsVisibility.put("Lokacia", lokaciaStlpec.visibleProperty());
     	
-    	//stlpec pre studenta
-    	TableColumn<Doucovanie, Student> studentStlpec = new TableColumn<>("Študent");
-    	studentStlpec.setCellValueFactory(new PropertyValueFactory<>("student"));
+    	TableColumn<Doucovanie, String> studentStlpec = new TableColumn<>("Študent");
+    	//studentStlpec.setCellValueFactory(new PropertyValueFactory<>("student"));
+    	studentStlpec.setCellValueFactory(new PropertyValueFactory<>("celeMenoStudenta"));
     	lessonsTableView.getColumns().add(studentStlpec);
     	columnsVisibility.put("Študent", studentStlpec.visibleProperty());
     	
     	//stlpec pre doucovatela
-    	TableColumn<Doucovanie, Doucovatel> doucovatelStlpec = new TableColumn<>("Doučovateľ");
-    	doucovatelStlpec.setCellValueFactory(new PropertyValueFactory<>("doucovatel"));
+    	TableColumn<Doucovanie, String> doucovatelStlpec = new TableColumn<>("Doučovateľ");
+    	doucovatelStlpec.setCellValueFactory(new PropertyValueFactory<>("celeMenoDoucovatela"));
     	lessonsTableView.getColumns().add(doucovatelStlpec);
     	columnsVisibility.put("Doučovateľ", doucovatelStlpec.visibleProperty());
     	
     	//stlpec pre predmet
-    	TableColumn<Doucovanie, DoucovanyPredmet> predmetStlpec = new TableColumn<>("Predmet");
-    	predmetStlpec.setCellValueFactory(new PropertyValueFactory<>("predmet"));
+    	TableColumn<Doucovanie, String> predmetStlpec = new TableColumn<>("Predmet");
+    	predmetStlpec.setCellValueFactory(new PropertyValueFactory<>("nazovPredmetu"));
     	lessonsTableView.getColumns().add(predmetStlpec);
     	columnsVisibility.put("Predmet", predmetStlpec.visibleProperty());
     	

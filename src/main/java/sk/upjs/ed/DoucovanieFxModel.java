@@ -33,6 +33,9 @@ public class DoucovanieFxModel {
 	private ObjectProperty<Student> student = new SimpleObjectProperty<Student>(); 
 	private ObjectProperty<Doucovatel> doucovatel = new SimpleObjectProperty<Doucovatel>(); 
 	private ObjectProperty<DoucovanyPredmet> predmet = new SimpleObjectProperty<DoucovanyPredmet>(); 
+	private StringProperty celeMenoStudenta = new SimpleStringProperty();
+	private StringProperty celeMenoDoucovatela = new SimpleStringProperty();
+	private StringProperty nazovPredmetu = new SimpleStringProperty();
 	
 	
 	
@@ -49,6 +52,9 @@ public class DoucovanieFxModel {
 		setPredmet(doucovanie.getPredmet());  
 		setStudent(doucovanie.getStudent());
 		setDoucovatel(doucovanie.getDoucovatel());
+		setCeleMenoStudenta(doucovanie.getCeleMenoStudenta());
+		setCeleMenoDoucovatela(doucovanie.getCeleMenoDoucovatela());
+		setNazovPredmetu(doucovanie.getNazovPredmetu());
 		
 	}
 	
@@ -63,6 +69,10 @@ public class DoucovanieFxModel {
 		doucovanie.setStudent(getStudent());
 		doucovanie.setDoucovatel(getDoucovatel());		
 		doucovanie.setId(getId());
+		doucovanie.setCeleMenoStudenta(getCeleMenoStudenta());
+		doucovanie.setCeleMenoDoucovatela(getCeleMenoDoucovatela());
+		doucovanie.setNazovPredmetu(getNazovPredmetu());
+		//doucovanie.setCeleMenoDoucovatela(getCeleMenoDoucovatela());
 		return doucovanie;
 	}
 
@@ -185,6 +195,36 @@ public class DoucovanieFxModel {
 	
 	public ObjectProperty<DoucovanyPredmet> predmetProperty() {
 		return predmet;
+	}
+	
+	public String getCeleMenoStudenta() {
+		return celeMenoStudenta.get();
+	}
+	public void setCeleMenoStudenta(String menoStudenta) {
+		this.celeMenoStudenta.set(menoStudenta);
+	}
+	public StringProperty celeMenoStudentaProperty() {
+		return celeMenoStudenta;
+	}
+	
+	public String getCeleMenoDoucovatela() {
+		return celeMenoDoucovatela.get();
+	}
+	public void setCeleMenoDoucovatela(String menoDoucovatela) {
+		this.celeMenoDoucovatela.set(menoDoucovatela);
+	}
+	public StringProperty celeMenoDoucovatelaProperty() {
+		return celeMenoDoucovatela;
+	}
+	
+	public String getNazovPredmetu() {
+		return nazovPredmetu.get();
+	}
+	public void setNazovPredmetu(String menoDoucovatela) {
+		this.nazovPredmetu.set(menoDoucovatela);
+	}
+	public StringProperty nazovPredmetuProperty() {
+		return nazovPredmetu;
 	}
 	
 }

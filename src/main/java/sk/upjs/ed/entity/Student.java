@@ -52,11 +52,17 @@ public class Student {
 	public void setAktivny(boolean aktivny) {
 		this.aktivny = aktivny;
 	}
+	/*
+	@Override
+	public String toString() {
+		return meno + " " + priezvisko;
+	}
+*/
 	
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", meno=" + meno + ", priezvisko=" + priezvisko + ", stupenStudia=" + stupenStudia
 				+ ", telefon=" + telefon + ", email=" + email + ", aktivny=" + aktivny + "]";
 	}
-		
+
 }

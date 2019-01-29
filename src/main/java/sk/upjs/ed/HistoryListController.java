@@ -100,26 +100,27 @@ public class HistoryListController {
     	columnsVisibility.put("Okruh", okruhStlpec.visibleProperty());
     	
     	//stlpec pre lokalitu
-    	TableColumn<Doucovanie, String> lokaciaStlpec = new TableColumn<>("Lokacia");
+    	TableColumn<Doucovanie, String> lokaciaStlpec = new TableColumn<>("Lokácia");
     	lokaciaStlpec.setCellValueFactory(new PropertyValueFactory<>("lokacia"));
     	historyTableView.getColumns().add(lokaciaStlpec);
-    	columnsVisibility.put("Lokacia", lokaciaStlpec.visibleProperty());
+    	columnsVisibility.put("Lokácia", lokaciaStlpec.visibleProperty());
     	    	
     	//stlpec pre studenta
-    	TableColumn<Doucovanie, Student> studentStlpec = new TableColumn<>("Študent");
-    	studentStlpec.setCellValueFactory(new PropertyValueFactory<>("student"));
+    	TableColumn<Doucovanie, String> studentStlpec = new TableColumn<>("Študent");
+    	//studentStlpec.setCellValueFactory(new PropertyValueFactory<>("student"));
+    	studentStlpec.setCellValueFactory(new PropertyValueFactory<>("celeMenoStudenta"));
     	historyTableView.getColumns().add(studentStlpec);
     	columnsVisibility.put("Študent", studentStlpec.visibleProperty());
     	
     	//stlpec pre doucovatela
-    	TableColumn<Doucovanie, Doucovatel> doucovatelStlpec = new TableColumn<>("Doučovateľ");
-    	doucovatelStlpec.setCellValueFactory(new PropertyValueFactory<>("doucovatel"));
+    	TableColumn<Doucovanie, String> doucovatelStlpec = new TableColumn<>("Doučovateľ");
+    	doucovatelStlpec.setCellValueFactory(new PropertyValueFactory<>("celeMenoDoucovatela"));
     	historyTableView.getColumns().add(doucovatelStlpec);
     	columnsVisibility.put("Doučovateľ", doucovatelStlpec.visibleProperty());
     	
     	//stlpec pre predmet
-    	TableColumn<Doucovanie, DoucovanyPredmet> predmetStlpec = new TableColumn<>("Predmet");
-    	predmetStlpec.setCellValueFactory(new PropertyValueFactory<>("predmet"));
+    	TableColumn<Doucovanie, String> predmetStlpec = new TableColumn<>("Predmet");
+    	predmetStlpec.setCellValueFactory(new PropertyValueFactory<>("nazovPredmetu"));
     	historyTableView.getColumns().add(predmetStlpec);
     	columnsVisibility.put("Predmet", predmetStlpec.visibleProperty());
 

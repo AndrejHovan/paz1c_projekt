@@ -17,6 +17,9 @@ public class Doucovanie {
 	private Doucovatel doucovatel;
 	private String lokacia;
 	private Student student;
+	private String celeMenoStudenta;
+	private String celeMenoDoucovatela;
+	private String nazovPredmetu;
 	
 	public Long getId() {
 		return id;
@@ -77,6 +80,36 @@ public class Doucovanie {
 	}
 	public void setCas(String cas) {
 		this.cas = cas;
+	}
+	
+	public String getCeleMenoStudenta() {
+		if (student != null) 
+			return student.getMeno() + " " + student.getPriezvisko();
+		else 
+			return "";
+	}
+	public void setCeleMenoStudenta(String celeMenoStudenta) {
+		this.celeMenoStudenta = celeMenoStudenta;
+	}
+	public String getCeleMenoDoucovatela() {
+		if (doucovatel != null) 
+			return doucovatel.getMeno() + " " + doucovatel.getPriezvisko();
+		else 
+			return "";
+		
+		
+	}
+	public void setCeleMenoDoucovatela(String celeMenoDoucovatela) {
+		this.celeMenoDoucovatela = celeMenoDoucovatela;
+	}
+	public String getNazovPredmetu() {
+		if (predmet != null)
+			return predmet.getNazov() + ", " + predmet.getStupenStudia();
+		else 
+			return "";
+	}
+	public void setNazovPredmetu(String nazovPredmetu) {
+		this.nazovPredmetu = nazovPredmetu;
 	}
 	
 	
