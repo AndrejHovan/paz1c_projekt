@@ -118,11 +118,14 @@ public class LessonEditController {
 		}
 		studentComboBox.setItems(menaStudentov);
 		//defaultna hodnota comboBoxu
-		studentComboBox.getSelectionModel().select(menaStudentov.get(0));
-		if(studentModel == null) {
+		if(doucovanieModel.getStudent() != null) {
+			studentComboBox.getSelectionModel().select(doucovanieModel.getCeleMenoStudenta());
+			studentModel = new StudentFxModel(doucovanieModel.getStudent());
+		}else {
+			studentComboBox.getSelectionModel().select(menaStudentov.get(0));
 			studentModel = new StudentFxModel(studenti.get(0));
-
 		}
+		
 		//nasetujeme doucovaniu studenta
 		doucovanieModel.setStudent(studentModel.getStudent());
 		
@@ -155,11 +158,13 @@ public class LessonEditController {
 		}
 		subjectComboBox.setItems(nazvyPredmetov);
 
-		if (predmetModel == null) {
+		if (doucovanieModel.getPredmet() == null) {
 			predmetModel = new PredmetFxModel(predmety.get(0));
 			subjectComboBox.getSelectionModel().select(nazvyPredmetov.get(0));
 			doucovanieModel.setPredmet(predmetModel.getPredmet());
-			
+		} else {
+			subjectComboBox.getSelectionModel().select(doucovanieModel.getNazovPredmetu());
+			predmetModel = new PredmetFxModel(doucovanieModel.getPredmet());
 		}
 
 		subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -206,9 +211,15 @@ public class LessonEditController {
 			}
 			if (!doucovatelia.isEmpty()) {
 				teacherComboBox.setItems(menaDoucovatelov);
-				teacherComboBox.getSelectionModel().select(menaDoucovatelov.get(0));
-				doucovatelModel = new DoucovatelFxModel(doucovatelia.get(0));
-				doucovanieModel.setDoucovatel(doucovatelModel.getDoucovatel());
+				if (doucovanieModel.getDoucovatel() == null) {
+					teacherComboBox.getSelectionModel().select(menaDoucovatelov.get(0));
+					doucovatelModel = new DoucovatelFxModel(doucovatelia.get(0));
+					doucovanieModel.setDoucovatel(doucovatelModel.getDoucovatel());
+				} else {
+					teacherComboBox.getSelectionModel().select(doucovanieModel.getCeleMenoDoucovatela());
+					doucovatelModel = new DoucovatelFxModel(doucovanie.getDoucovatel());
+				}
+				
 			}
 			
 		}
