@@ -14,6 +14,8 @@ public interface StudentDao {
 	void delete(long id);
 
 	void save(Student student);
+	
+	List<Student> getAllActive();
 
 	//Student getById(long id);
 

@@ -59,7 +59,10 @@ public class StudentEditController {
 		//nastavujeme hodnoty pre combobox (mozne vybratelne)
 		stupenComboBox.getItems().setAll(StupenStudia.values());
 		//defaultne nastavime strednu skolu
-		stupenComboBox.getSelectionModel().select(StupenStudia.values()[1]);
+		if (studentModel.getStupenStudia() != null)
+			stupenComboBox.getSelectionModel().select(studentModel.getStupenStudia());
+		else
+			stupenComboBox.getSelectionModel().select(StupenStudia.values()[1]);
 		//aby to aj FXmodel videl tak mu to pripomenieme.. - vysvetlit
 		studentModel.setStupenStudia(stupenComboBox.getSelectionModel().getSelectedItem());
 		//ak zmenime vyber tak sa zmeni aj v FXmodeli

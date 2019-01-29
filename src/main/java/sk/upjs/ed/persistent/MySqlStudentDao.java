@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import sk.upjs.ed.entity.Student;
+import sk.upjs.ed.entity.StupenStudia;
 
 public class MySqlStudentDao implements StudentDao {
 
@@ -51,7 +52,6 @@ public class MySqlStudentDao implements StudentDao {
 		Student student = (Student) jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Student.class));
 		return student;
 	}*/
-
 	@Override
 	public void save(Student student) throws NullPointerException{
 		if (student == null) 
@@ -59,11 +59,13 @@ public class MySqlStudentDao implements StudentDao {
 		if (student.getId() == null) {
 			add(student);
 		} else {
-			//toto neviem presne ako vyplnit
+			//toto neviem presne ako vyplnit    ,   student.getStupenStudia(),, StupenStudia = ?
 			//String sql = "UPDATE student SET meno = ?, priezvisko = ?, stupenStudia = ?, telefon = ?, email = ? WHERE id = ?";
-			String sql = "UPDATE student SET meno = ?, priezvisko = ?, stupenStudia = ?, telefon = ?, email = ?, aktivny = ? WHERE id = ?";
+			String sql = "UPDATE student SET meno = ?, priezvisko = ?, telefon = ?, email = ?, aktivny = ? WHERE id = ?";
 			//jdbcTemplate.update(sql, student.getMeno(), student.getPriezvisko(), student.getStupenStudia(), student.getTelefon(), student.getEmail(), student.getId());
-			jdbcTemplate.update(sql, student.getMeno(), student.getPriezvisko(), student.getStupenStudia(), student.getTelefon(), student.getEmail(), student.isAktivny(),student.getId());
+			jdbcTemplate.update(sql, student.getMeno(), student.getPriezvisko(), student.getTelefon(), student.getEmail(), student.isAktivny(),student.getId());
+			String sql2 = "UPDATE student SET stupenStudia = '" + student.getStupenStudia() + "' WHERE id = " + student.getId();
+			jdbcTemplate.update(sql2);
 		}
 
 		
@@ -77,6 +79,13 @@ public class MySqlStudentDao implements StudentDao {
 			throw new EntityNotFoundException(id);
 		}
 		
+	}
+
+	@Override
+	public List<Student> getAllActive() {
+		String sql = "SELECT id, Meno, Priezvisko, StupenStudia, Telefon, Email, Aktivny FROM student WHERE Aktivny = 1";
+		List<Student> studenti = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Student.class));
+		return studenti;
 	}
 
 }

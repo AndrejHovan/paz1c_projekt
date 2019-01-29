@@ -53,7 +53,13 @@ public class StudentsListController {
     private Button removeStudentButton;
     
     @FXML
+    private Button editButton;
+    
+    @FXML
     void initialize() {
+    	editButton.setDisable(true);
+    	removeStudentButton.setDisable(true);
+    	
     	studentsModel = FXCollections.observableArrayList(studentDao.getAll());
 
     	//stlpec pre id
@@ -113,6 +119,17 @@ public class StudentsListController {
 			}
 		});
     	
+    	editButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				StudentEditController editController = 
+							new StudentEditController(selectedStudent.get());            
+					showModalWindow(editController, "StudentsEdit.fxml");
+					// tento kod sa spusti az po zatvoreni okna
+					studentsModel.setAll(studentDao.getAll());
+			}
+		});
+    	
     	
     	removeStudentButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -129,11 +146,13 @@ public class StudentsListController {
 			public void changed(ObservableValue<? extends Student> observable, 
 					Student oldValue,
 					Student newValue) {
-				/*if (newValue == null) {
+				if (newValue == null) {
 					editButton.setDisable(true);
+					removeStudentButton.setDisable(true);
 				} else {
 					editButton.setDisable(false);
-				}*/
+					removeStudentButton.setDisable(false);
+				}
 				selectedStudent.set(newValue);
 			}
 		});

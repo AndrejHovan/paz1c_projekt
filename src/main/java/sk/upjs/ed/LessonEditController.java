@@ -111,7 +111,7 @@ public class LessonEditController {
 	@FXML
 	void initialize() {
 		// comboBox pre vyber studentov
-		studenti = FXCollections.observableArrayList(studentDao.getAll());
+		studenti = FXCollections.observableArrayList(studentDao.getAllActive());
 		ObservableList<String> menaStudentov = FXCollections.observableArrayList();
 		for (int i = 0; i < studenti.size(); i++) {
 			menaStudentov.add(studenti.get(i).getId() + " " + studenti.get(i).getMeno() + " " + studenti.get(i).getPriezvisko());

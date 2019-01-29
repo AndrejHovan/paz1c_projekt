@@ -22,7 +22,12 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="removeStudentButton" layoutX="503.0" layoutY="97.0" mnemonicParsing="false" text="Odstrániť">
+      <Button fx:id="removeStudentButton" layoutX="503.0" layoutY="140.0" mnemonicParsing="false" text="Odstrániť">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="editButton" layoutX="503.0" layoutY="98.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="79.0" text="Upraviť">
          <font>
             <Font size="14.0" />
          </font>
